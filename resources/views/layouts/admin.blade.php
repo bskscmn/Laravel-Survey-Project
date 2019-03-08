@@ -70,15 +70,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
 
-    
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="nav-icon fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-        <li><a href="#"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-        <li><a href="#"><i class="fas fa-key"></i></i> <span>Şifre İşlemleri</span></a></li>
+        <li class="active"><a href="{{ url('/home') }}"><i class="nav-icon fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+        <li><a href="{{ route('profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
         <li>
             <a  href="{{ route('logout') }}"
               onclick="event.preventDefault();
@@ -86,19 +83,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <i class="fas fa-sign-out-alt"></i>
               <span>Logout</span>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </li>
+        @if(Auth::user()->hasRole('Admin')) 
+          <li class="header">ADMIN MENU</li>
+          <li class="treeview">
+            <a href="#"><i class="nav-icon fa fa-th"></i> <span>Yönetim</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
             </a>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="nav-icon fa fa-th"></i> <span>Yönetim</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fas fa-users nav-icon"></i> Kullanıcılar</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
+            <ul class="treeview-menu">
+              <li><a href="{{ route('admin.users') }}"><i class="fas fa-users nav-icon"></i> Kullanıcılar</a></li>
+            </ul>
+          </li>
+        @endif
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -118,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Yargıtay Ön Büro Anketi
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="#">Yargıtay Web & Tasarım </a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 Yargıtay Web & Tasarım.</strong> All rights reserved.
   </footer>
 
 </div>
@@ -127,5 +128,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED JS SCRIPTS -->
 
 <script type="text/javascript" src="/js/app.js"></script>
+@yield('scripts')
 </body>
 </html>
