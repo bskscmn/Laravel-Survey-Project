@@ -23,4 +23,6 @@ Route::get('/profile',['as'=>'profile','uses'=>'UserController@profile']);
 
 Route::get('/users',['as'=>'admin.users','uses'=>'UserController@index','middleware' => ['roles'], 'roles' => ['Admin']]);
 Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store','middleware' => ['roles'], 'roles' => ['Admin']]);
+Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update','middleware' => ['roles'], 'roles' => ['Admin']]);
+Route::delete('user/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
 
