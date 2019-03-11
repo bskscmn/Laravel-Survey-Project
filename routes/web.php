@@ -26,3 +26,5 @@ Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store','mi
 Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update','middleware' => ['roles'], 'roles' => ['Admin']]);
 Route::delete('user/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
 
+Route::get('/ankets',['as'=>'admin.ankets','uses'=>'AnketController@index','middleware' => ['roles'], 'roles' => ['Admin']]);
+Route::post('/newanket',['as'=>'admin.newanket','uses'=>'AnketController@store','middleware' => ['roles'], 'roles' => ['Admin']]);
