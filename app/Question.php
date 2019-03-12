@@ -10,7 +10,7 @@ class Question extends Model
     	 return $this->belongsTo('App\Anket'); 
     }
 
-    public function questionType() {
+    public function question_type() {
     	 return $this->belongsTo('App\QuestionType'); 
     }
 
