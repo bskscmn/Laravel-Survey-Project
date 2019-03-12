@@ -76,7 +76,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,'.$user->id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'sometimes|string|min:6',
+            'password' => 'nullable|sometimes|string|min:6',
         ], $messages);
 
 		if(isset($request['password'])) { $request['password'] =  Hash::make($request['password']); }
