@@ -18,13 +18,22 @@ Route::get('/', function () {
 //Auth::routes();
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile',['as'=>'profile','uses'=>'UserController@profile']);
 
-Route::get('/users',['as'=>'admin.users','uses'=>'UserController@index','middleware' => ['roles'], 'roles' => ['Admin']]);
-Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store','middleware' => ['roles'], 'roles' => ['Admin']]);
-Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update','middleware' => ['roles'], 'roles' => ['Admin']]);
-Route::delete('user/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
+Route::group(['middleware' => 'auth'], function() {
 
-Route::get('/ankets',['as'=>'admin.ankets','uses'=>'AnketController@index','middleware' => ['roles'], 'roles' => ['Admin']]);
-Route::post('/newanket',['as'=>'admin.newanket','uses'=>'AnketController@store','middleware' => ['roles'], 'roles' => ['Admin']]);
+  	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/profile',['as'=>'profile','uses'=>'UserController@profile']);
+
+	Route::group(['middleware' => 'roles', 'roles' => ['Admin']], function() {
+
+		Route::get('/users',['as'=>'admin.users','uses'=>'UserController@index']);
+		Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store']);
+		Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update']);
+		Route::delete('user/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
+
+  		Route::resource('ankets', 'AnketController');
+
+	});
+
+});
+
