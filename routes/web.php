@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::delete('ankets/delete/{id}', ['as' => 'admin.anketdestroy', 'uses' => 'AnketController@destroy']);  	
 		Route::get('/ankets/show/{id}',['as'=>'admin.anket','uses'=>'AnketController@show']);	
 
+		//Questions
+		Route::post('/questions/store/{anketid}',['as'=>'admin.questionstore','uses'=>'QuestionController@store']);
+
 	});
 
 });

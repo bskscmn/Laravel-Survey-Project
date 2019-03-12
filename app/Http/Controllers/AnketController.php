@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Anket;
+use App\QuestionType;
 
 class AnketController extends Controller
 {
@@ -28,7 +29,7 @@ class AnketController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'name.required' => 'İsim alanı zorunludur.',
+            'name.required' => 'Anket alanı zorunludur.',
         ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
@@ -51,7 +52,8 @@ class AnketController extends Controller
     public function show($id)
     {
     	$anket = Anket::findOrFail($id);
-        return view('admin.anket', compact('anket'));
+    	$questionTypes = QuestionType::all();
+        return view('admin.anket', compact('anket', 'questionTypes'));
     }
 
     /**
@@ -66,7 +68,7 @@ class AnketController extends Controller
         $anket = Anket::findOrFail($request['id']);
 
         $messages = [
-            'name.required' => 'İsim alanı zorunludur.',
+            'name.required' => 'Anket alanı zorunludur.',
         ];
         $this->validate($request,[
             'name' => 'required|string|max:255',

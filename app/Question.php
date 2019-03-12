@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+	protected $guarded = array();
+
 	public function anket() {
     	 return $this->belongsTo('App\Anket'); 
     }
