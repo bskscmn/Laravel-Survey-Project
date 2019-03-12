@@ -15,8 +15,10 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('anket_id');
-            $table->string('question_type_id');
+            $table->string('anket_id')->unsigned();
+            $table->foreign('anket_id')->references('id')->on('ankets')->onDelete('cascade');
+            $table->string('question_type_id')->unsigned();
+            $table->foreign('question_type_id')->references('id')->on('question_types')->onDelete('cascade');
             $table->string('soru');
 
             $table->timestamps();
