@@ -47,7 +47,7 @@
                         <td class="thisact">{{ $user->active }}</td>
                         <td>
                           <button id="{{ $user->id }}" data-item-id="{{ $user->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-edit"></i></button>
-                          <form action="{{ route('user.destroy', $user->id)}}" method="post">
+                          <form action="{{ route('admin.userdestroy', $user->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" type="submit" onclick="return myFunction();"><i class="fa fa-trash"></i></button>

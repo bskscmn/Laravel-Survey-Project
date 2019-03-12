@@ -26,12 +26,18 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::group(['middleware' => 'roles', 'roles' => ['Admin']], function() {
 
+		//Users
 		Route::get('/users',['as'=>'admin.users','uses'=>'UserController@index']);
 		Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store']);
 		Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update']);
-		Route::delete('user/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
+		Route::delete('user/delete/{id}', ['as' => 'admin.userdestroy', 'uses' => 'UserController@destroy']);
 
-  		Route::resource('ankets', 'AnketController');
+		//Ankets
+		Route::get('/ankets',['as'=>'admin.ankets','uses'=>'AnketController@index']);
+		Route::post('/ankets/store',['as'=>'admin.anketstore','uses'=>'AnketController@store']);
+		Route::post('/ankets/edit',['as'=>'admin.anketedit','uses'=>'AnketController@update']);
+		Route::delete('ankets/delete/{id}', ['as' => 'admin.anketdestroy', 'uses' => 'AnketController@destroy']);  	
+		Route::get('/ankets/show/{id}',['as'=>'admin.anket','uses'=>'AnketController@show']);	
 
 	});
 

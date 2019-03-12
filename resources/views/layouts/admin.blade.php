@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU</li>
+        <li class="header">USER MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="{{ url('/home') }}"><i class="nav-icon fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         <li><a href="{{ route('profile') }}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
@@ -99,6 +99,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li><a href="{{ route('admin.users') }}"><i class="fas fa-users nav-icon"></i> Kullanıcılar</a></li>
             </ul>
           </li>
+
+          <li class="header">ANKET MENU</li>
+          <li><a href="{{ route('admin.ankets') }}"><i class="fas fa-poll nav-icon"></i> Anketler</a></li>
         @endif
       </ul>
       <!-- /.sidebar-menu -->
