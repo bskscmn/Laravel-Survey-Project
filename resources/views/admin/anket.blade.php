@@ -52,7 +52,19 @@
                       <div class="card-body">
                           <form method="POST" action="{{ route('admin.questionstore', $anket->id ) }}">
                               @csrf
+                              <div class="form-group row">
+                                  <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('Soru No') }}</label>
 
+                                  <div class="col-md-8">
+                                      <input id="questionNumber" type="text" class="form-control{{ $errors->has('questionNumber') ? ' is-invalid' : '' }}" name="questionNumber" value="{{ old('questionNumber') }}" required autofocus>
+
+                                      @if ($errors->has('questionNumber'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('questionNumber') }}</strong>
+                                          </span>
+                                      @endif
+                                  </div>
+                              </div>
 
                               <div class="form-group row">
                                   <label for="soru" class="col-md-2 col-form-label text-md-right">{{ __('Soru') }}</label>
@@ -68,9 +80,9 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <label for="questionType" class="col-md-4 col-form-label text-md-right">{{ __('Soru tipi') }}</label>
+                                  <label for="questionType" class="col-md-2 col-form-label text-md-right">{{ __('Soru tipi') }}</label>
 
-                                  <div class="col-md-6">
+                                  <div class="col-md-8">
                                     <select id="questionType" name="questionType" class="form-control{{ $errors->has('questionType') ? ' is-invalid' : '' }}" required>
                                       <option value="" selected disabled>--Seçiniz--</option>
                                       @foreach($questionTypes as $questionType)

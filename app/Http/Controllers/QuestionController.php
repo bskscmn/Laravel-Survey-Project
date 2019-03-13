@@ -19,10 +19,12 @@ class QuestionController extends Controller
     public function store(Request $request, $anketid)
     {
         $messages = [
+            'questionNumber.required' => 'Soru no alanı zorunludur.',
             'soru.required' => 'Soru alanı zorunludur.',
             'questionType.required' => 'Yetki seçiniz.',
         ];
         $this->validate($request,[
+            'questionNumber' => 'required|integer',
             'soru' => 'required|string|max:255',
             'questionType' => 'required|integer',
         ], $messages);
@@ -30,9 +32,9 @@ class QuestionController extends Controller
         $question = Question::create([
             'anket_id' => $anketid,
             'question_type_id' => $request['questionType'],
+            'question_number' => $request['questionNumber'],
             'soru' => $request['soru'],
         ]);
-
 
         $anket = Question::findOrFail($anketid);
         $questionTypes = QuestionType::all();
