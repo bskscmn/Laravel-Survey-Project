@@ -21,7 +21,7 @@ class QuestionController extends Controller
         $messages = [
             'questionNumber.required' => 'Soru no alanı zorunludur.',
             'soru.required' => 'Soru alanı zorunludur.',
-            'questionType.required' => 'Yetki seçiniz.',
+            'questionType.required' => 'Soru tipi seçiniz.',
         ];
         $this->validate($request,[
             'questionNumber' => 'required|integer',
@@ -36,43 +36,35 @@ class QuestionController extends Controller
             'soru' => $request['soru'],
         ]);
 
-        $anket = Question::findOrFail($anketid);
         $questionTypes = QuestionType::all();
         return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $anketid)
     {
-        //
+        $question = Question::findOrFail($request['id']);
+
+        $messages = [
+            'question_number.required' => 'Soru no alanı zorunludur.',
+            'soru.required' => 'Soru alanı zorunludur.',
+            'question_type_id.required' => 'Soru tipi seçiniz.',
+        ];
+        $this->validate($request,[
+            'question_number' => 'required|integer',
+            'soru' => 'required|string|max:255',
+            'question_type_id' => 'required|integer',
+        ], $messages);
+
+        $question->update($request->all());
+        
+        $questionTypes = QuestionType::all();
+        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
     }
 
     /**
@@ -83,6 +75,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $anketid = $question->anket_id;
+        $question->delete();
+
+        $questionTypes = QuestionType::all();
+        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
     }
 }

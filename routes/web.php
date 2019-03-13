@@ -36,11 +36,13 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::get('/ankets',['as'=>'admin.ankets','uses'=>'AnketController@index']);
 		Route::post('/ankets/store',['as'=>'admin.anketstore','uses'=>'AnketController@store']);
 		Route::post('/ankets/edit',['as'=>'admin.anketedit','uses'=>'AnketController@update']);
-		Route::delete('ankets/delete/{id}', ['as' => 'admin.anketdestroy', 'uses' => 'AnketController@destroy']);  	
-		Route::get('/ankets/show/{id}',['as'=>'admin.anket','uses'=>'AnketController@show']);	
+		Route::delete('ankets/delete/{id}', ['as' => 'admin.anketdestroy', 'uses' => 'AnketController@destroy']);
+		Route::get('/ankets/show/{id}',['as'=>'admin.anket','uses'=>'AnketController@show']);
 
 		//Questions
 		Route::post('/questions/store/{anketid}',['as'=>'admin.questionstore','uses'=>'QuestionController@store']);
+		Route::post('/questions/edit/{anketid}',['as'=>'admin.questionedit','uses'=>'QuestionController@update']);
+		Route::delete('questions/delete/{id}', ['as' => 'admin.questiondestroy', 'uses' => 'QuestionController@destroy']);
 
 	});
 
