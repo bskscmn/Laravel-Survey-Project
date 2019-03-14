@@ -44,6 +44,11 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::post('/questions/edit/{anketid}',['as'=>'admin.questionedit','uses'=>'QuestionController@update']);
 		Route::delete('questions/delete/{id}', ['as' => 'admin.questiondestroy', 'uses' => 'QuestionController@destroy']);
 
+		//Choices
+		Route::post('/choices/store/{anketid}',['as'=>'admin.choicestore','uses'=>'ChoiceController@store']);
+		Route::post('/choices/edit/{anketid}',['as'=>'admin.choiceedit','uses'=>'ChoiceController@update']);
+		Route::delete('choices/delete/{id}', ['as' => 'admin.choicedestroy', 'uses' => 'ChoiceController@destroy']);
+
 	});
 
 });

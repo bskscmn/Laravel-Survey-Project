@@ -18,7 +18,7 @@
                   <div class="input-group input-group-sm">
                     <div class="col-lg-12">
                       <h3 class="float-left">AnketSoruları</h3>
-                      <button  class="btn btn-success float-right" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-question-circle"></i> Soru Ekle</button>
+                      <button  class="btn btn-success float-right" data-toggle="modal" data-target="#addNewQuestion"><i class="fas fa-question-circle"></i> Soru Ekle</button>
                     </div>
                   </div>
                 </div>
@@ -34,8 +34,10 @@
                         <td class="thistype">{{ $question->question_type->type }}</td>    
                         <td>
                           <div class="btn-group float-right" role="group" aria-label="Buttons group">
-
-                            <button id="{{ $question->id }}" data-item-id="{{ $question->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-edit"></i></button>
+                            @if($question->question_type->id == 1)
+                            <button  class="btn btn-success btn-sm" data-toggle="modal" data-target="#addNewChoice" onclick="return setQuestionId({{ $question->id}});">Seçenek Ekle
+                            @endif
+                            <button id="{{ $question->id }}" data-item-id="{{ $question->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal-question"><i class="fa fa-edit"></i></button>
 
                             <form action="{{ route('admin.questiondestroy', $question->id)}}" method="post">
                               @csrf
@@ -44,7 +46,29 @@
                             </form>
                           </div>
                         </td>                   
-                      </tr>
+                      </tr>                     
+                      @if($question->question_type->id == 1)
+
+                          @foreach($question->choices as $choice)
+                            <tr class="data-row table-sm" >
+                              <td></td>
+                              <td class="thischoice table-secondary" colspan="2">{{ $choice->choice }}</td>
+                              <td class="table-secondary">
+                                <div class="btn-group float-right" role="group" aria-label="Buttons group">
+
+                                  <button id="{{ $choice->id }}" data-item-id="{{ $choice->id }}" class="btn btn-info btn-sm edit-choice" data-toggle="modal" data-target="#edit-modal-choice"><i class="fa fa-edit"></i></button>
+
+                                  <form action="{{ route('admin.choicedestroy', $choice->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm" type="submit" onclick="return myFunction();"><i class="fa fa-trash"></i></button>
+                                  </form>
+                                </div>
+                              </td> 
+                            </tr>
+                          @endforeach
+
+                      @endif
                   @endforeach
                   </tbody>
                 </table>
@@ -56,12 +80,12 @@
         </div>
       </div>
       
-      <!-- Modal Add New -->
-        <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewModalLabel" aria-hidden="true">
+      <!-- Modal Add New Question-->
+        <div class="modal fade" id="addNewQuestion" tabindex="-1" role="dialog" aria-labelledby="addNewQuestionLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewModalLabel">Soru Ekle</h5>
+                <h5 class="modal-title" id="addNewQuestionLabel">Soru Ekle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -134,12 +158,12 @@
             </div>
           </div>
         </div>
-      <!-- Modal Edit User-->
-        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+      <!-- Modal Edit Question-->
+        <div class="modal fade" id="edit-modal-question" tabindex="-1" role="dialog" aria-labelledby="edit-modal-question-label" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="edit-modal-label">Kullanıcı Düzenle</h5>
+                <h5 class="modal-title" id="edit-modal-question-label">Soru Düzenle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -148,7 +172,7 @@
                   <div class="card">
 
                       <div class="card-body">
-                          <form id="edit-form" method="POST" action="{{ route('admin.questionedit', $anket->id) }}">
+                          <form id="edit-form-question" method="POST" action="{{ route('admin.questionedit', $anket->id) }}">
                               @csrf
                               <input type="hidden" id="modal-input-id" name="id" value="">
 
@@ -215,6 +239,105 @@
             </div>
           </div>
         </div>
+
+      <!-- Modal Add New Choice-->
+        <div class="modal fade" id="addNewChoice" tabindex="-1" role="dialog" aria-labelledby="addNewChoiceLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addNewChoiceLabel">Seçenek Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div> 
+                <div class="modal-body">
+                  <div class="card">
+
+                      <div class="card-body">
+                          <form method="POST" action="{{ route('admin.choicestore', $anket->id ) }}">
+                              @csrf
+                              <input type="hidden" id="modal-input-questionid" name="question_id" value="">
+                              
+
+                              <div class="form-group row">
+
+                                  <div class="col-md-8">
+                                      <input id="choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" placeholder="Seçenek" required autofocus>
+
+                                      @if ($errors->has('choice'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('choice') }}</strong>
+                                          </span>
+                                      @endif
+                                  </div>
+                              </div>
+                              
+
+                              <div class="form-group row mb-0">
+                                  <div class="col-md-6 offset-md-4">
+                                      <button type="submit" class="btn btn-primary">
+                                          {{ __('Kaydet') }}
+                                      </button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      <!-- Modal Edit Choice-->
+        <div class="modal fade" id="edit-modal-choice" tabindex="-1" role="dialog" aria-labelledby="edit-modal-choice-label" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="edit-modal-choice-label">Seçenek Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div> 
+                <div class="modal-body" id="attachment-body-content">
+                  <div class="card">
+
+                      <div class="card-body">
+                          <form id="edit-form-choice" method="POST" action="{{ route('admin.choiceedit', $anket->id) }}">
+                              @csrf
+                              <input type="hidden" id="modal-input-choiceid" name="id" value="">
+
+                               <div class="form-group row">
+                                  <label for="modal-input-choice" class="col-md-4 col-form-label text-md-right">{{ __('Seçenek') }}</label>
+
+                                  <div class="col-md-6">
+                                      <input id="modal-input-choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" required autofocus>
+
+                                      @if ($errors->has('choice'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('choice') }}</strong>
+                                        </span>
+                                      @endif
+                                  </div>
+                              </div>
+
+                              <div class="form-group row mb-0">
+                                  <div class="col-md-6 offset-md-4">
+                                      <button type="submit" class="btn btn-primary">
+                                          {{ __('Kaydet') }}
+                                      </button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+
     </section>
     <!-- /.content -->
 </div>
@@ -225,8 +348,8 @@ $(document).ready(function() {
   /**
    * for showing edit item popup
    */
-
- $(document).on('click', ".edit-item", function() {
+  // on modal edit question
+  $(document).on('click', ".edit-item", function() {
 
     var id = this.id; 
     var row = $(this).closest(".data-row");
@@ -251,14 +374,35 @@ $(document).ready(function() {
   });
 
   // on modal hide
-  $('#edit-modal').on('hide.bs.modal', function() {
-    $("#edit-form").trigger("reset");
+  $('#edit-modal-question').on('hide.bs.modal', function() {
+    $("#edit-form-question").trigger("reset");
+  });
+
+  // on modal edit choice
+  $(document).on('click', ".edit-choice", function() {
+
+    var id = this.id; 
+    var row = $(this).closest(".data-row");
+    var choice = row.children(".thischoice").text();
+
+    $("#modal-input-choiceid").val(id);
+    $("#modal-input-choice").val(choice);
+    
+  });
+
+  // on modal hide
+  $('#edit-modal-choice').on('hide.bs.modal', function() {
+    $("#edit-form-choice").trigger("reset");
   });
  
-})
+});
+
   function myFunction() {
       if(!confirm("Silmek istediğinize emin misiniz?"))
       event.preventDefault();
+  }
+  function setQuestionId($questionid) {
+      $("#modal-input-questionid").val($questionid);
   }
 </script>
 
