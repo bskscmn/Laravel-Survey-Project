@@ -35,6 +35,10 @@ class QuestionController extends Controller
             'question_number' => $request['questionNumber'],
             'soru' => $request['soru'],
         ]);
+        if(isset($request['scaleType'])){
+            $question->scale_type = $request['scaleType'];
+            $question->save();
+        }
 
         $questionTypes = QuestionType::all();
         return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
@@ -59,6 +63,7 @@ class QuestionController extends Controller
             'question_number' => 'required|integer',
             'soru' => 'required|string|max:255',
             'question_type_id' => 'required|integer',
+            'scale_type_id' => 'sometimes|required|integer',
         ], $messages);
 
         $question->update($request->all());

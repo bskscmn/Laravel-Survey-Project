@@ -12,11 +12,19 @@ class Question extends Model
     	 return $this->belongsTo('App\Anket'); 
     }
 
-    public function question_type() {
+    public function questionType() {
     	 return $this->belongsTo('App\QuestionType'); 
     }
 
+    public function scaleType() {
+         return $this->belongsTo('App\ScaleType'); 
+    }
+
+    public function scaleQuestions() {
+         return $this->hasMany('App\ScaleQuestion'); 
+    }
+
     public function choices() {
-    	 return $this->hasMany('App\Choice'); 
+         return $this->hasMany('App\Choice'); 
     }
 }

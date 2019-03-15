@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnToQuestionsTable extends Migration
+class AddScaleTypeColumnToQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddColumnToQuestionsTable extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->integer('question_number')->after('question_type_id')->default('1');
+            $table->integer('scale_type')->after('soru')->nullable();
+            $table->foreign('scale_type')->references('id')->on('scale_types')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,7 +27,7 @@ class AddColumnToQuestionsTable extends Migration
     public function down()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->dropColumn('question_number');
+            //
         });
     }
 }

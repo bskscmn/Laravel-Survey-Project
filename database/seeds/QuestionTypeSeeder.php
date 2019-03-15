@@ -13,7 +13,23 @@ class QuestionTypeSeeder extends Seeder
     public function run()
     {
         $questionType = new QuestionType();
-        $questionType->type = 'Çoktan seçmeli';
+        $questionType->type = 'Tek seçenek';
+        $questionType->save();
+
+        $questionType = new QuestionType();
+        $questionType->type = 'Birden çok seçenek';
+        $questionType->save();
+
+        $questionType = new QuestionType();
+        $questionType->type = 'Tek seçenek + Diğer alanı';
+        $questionType->save();
+
+        $questionType = new QuestionType();
+        $questionType->type = 'Birden çok seçenek + Diğer alanı';
+        $questionType->save();
+
+        $questionType = new QuestionType();
+        $questionType->type = 'Dereceleme';
         $questionType->save();
 
         $questionType = new QuestionType();

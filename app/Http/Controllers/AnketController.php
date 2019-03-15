@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Anket;
 use App\QuestionType;
+use App\ScaleType;
 
 class AnketController extends Controller
 {
@@ -52,8 +53,9 @@ class AnketController extends Controller
     public function show($id)
     {
     	$anket = Anket::findOrFail($id);
-    	$questionTypes = QuestionType::all();
-        return view('admin.anket', compact('anket', 'questionTypes'));
+        $questionTypes = QuestionType::all();
+        $scaleTypes = ScaleType::all();
+        return view('admin.anket', compact('anket', 'questionTypes', 'scaleTypes'));
     }
 
     /**
