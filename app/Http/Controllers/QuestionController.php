@@ -87,13 +87,5 @@ class QuestionController extends Controller
         $questionTypes = QuestionType::all();
         return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
     }
-
-    public function surveysubmit(Request $request)
-    {
-     return $request->all();
-
-       
-    }
-
     
 }

@@ -1,63 +1,296 @@
 @extends('layouts.survey')
 
 @section('content')
-<form action="{{ route('surveysubmit')}}" method="post" class="col-sm-12 h-100 ">
+<form action="{{ route('surveystore', $survey->id)}}" method="post" class="col-sm-12 h-100 ">
 	@csrf
-	<div class="question col-sm-10 h-100 " id="1">
-	  <div class="row h-100 align-items-center">
-	  	<div class="col-sm-10 ml-5 ">
-	    <h2>Title of the question 1</h2>
+	<input type="hidden" name="anketid" value="{{$survey->id}}">
+	@foreach($survey->questions as $question)
+		<div class="question col-sm-11 h-100" id="question-{{$question->question_number}}">
+		  	
+			@switch($question->question_type_id)
+			    @case(1)
+						
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-10 ml-5 ">
+					    		<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
-	    	<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-			  <label class="form-check-label" for="exampleRadios1">
-			    Default radio
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-			  <label class="form-check-label" for="exampleRadios2">
-			    Second default radio
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-			  <label class="form-check-label" for="exampleRadios3">
-			    Disabled radio
-			  </label>
-			</div>	 
-			<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
-		</div>    
+									@foreach($question->choices as $choice)
+								    	<div class="form-check">
+										  <input class="form-check-input" type="radio" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
+										  <label class="form-check-label" for="{{ $choice->id }}">
+										    {{ $choice->choice }}
+										  </label>
+										</div>
+									@endforeach
+
+									@if($loop->last)
+										<button type="submit" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></button>
+									@else
+										<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
+									@endif
+								</div>
+							</div>
+
+        		@break
+
+			    @case(2)
+			    	
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-10 ml-5 ">
+
+						    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
+
+									@foreach($question->choices as $choice)
+								    	<div class="form-check">
+										  <input class="form-check-input" type="checkbox" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
+										  <label class="form-check-label" for="{{ $choice->id }}">
+										    {{ $choice->choice }}
+										  </label>
+										</div>
+									@endforeach
+
+									@if($loop->last)
+										<button type="submit" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></button>
+									@else
+										<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
+									@endif
+								</div>
+							</div>
+
+			      @break
+
+			    @case(3)
+			    	
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-10 ml-5 ">
+
+							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
+
+									@foreach($question->choices as $choice)
+								    	<div class="form-check">
+										  <input class="form-check-input" type="radio" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
+										  <label class="form-check-label" for="{{ $choice->id }}">
+										    {{ $choice->choice }}
+										  </label>
+										</div>
+									@endforeach
+									
+									<div class="form-check">
+									  <input class="form-check-input" type="radio" name="{{ $question->id }}" id="{{ $choice->id }}" value="0"
+									  onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus();}">
+									  <label class="form-check-label" for="{{ $choice->id }}">
+									    Diğer <input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
+									  </label>
+									</div>
+
+									@if($loop->last)
+										<button type="submit" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></button>
+									@else
+										<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
+									@endif
+								</div>
+							</div>
+
+			      @break
+
+			    @case(4)
+			    	
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-10 ml-5 ">
+
+							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
+
+									@foreach($question->choices as $choice)
+								    	<div class="form-check">
+										  <input class="form-check-input" type="checkbox" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
+										  <label class="form-check-label" for="{{ $choice->id }}">
+										    {{ $choice->choice }}
+										  </label>
+										</div>
+									@endforeach
+
+									<div class="form-check">
+									  <input class="form-check-input" type="checkbox" id="othercheck-{{ $question->id }}" name="{{ $question->id }}" value="0"  
+									  onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus();}">
+									  <label class="form-check-label" for="{{ $choice->id }}">
+									    Diğer
+									  </label> 
+									  <input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
+									</div>
+
+									@if($loop->last)
+										<button type="submit" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></button>
+									@else
+										<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
+									@endif
+								</div>
+							</div>
+
+			      @break
+
+			    @case(5)
+			    	
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-12">
+
+							    <h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
+
+							    	@php($titles = explode("|", $question->scaleType->type ))
+
+							    	@switch($question->scaleType->id)
+			    						@case(1)
+
+												<table id="tablePreview" class="table">
+												  <thead>
+												    <tr>
+												      <th>#</th>
+												      <th>{{ $titles[0] }}</th>
+												      <th>{{ $titles[1] }}</th>
+												    </tr>
+												  </thead>
+												  <tbody>
+												  	@foreach($question->scaleQuestions as $scaleQuestion)
+												    <tr>
+												      <th scope="row">{{ $scaleQuestion->soru }}</th>
+												      <td></td>
+												      <td></td>
+												    </tr>
+												    @endforeach
+												  </tbody>
+												</table>
+
+			    							@break
+
+			    						@case(2)
+
+			    							<table id="tablePreview" class="table">
+												  <thead>
+												    <tr>
+												      <th>#</th>
+												      <th>{{ $titles[0] }}</th>
+												      <th>{{ $titles[1] }}</th>
+												      <th>{{ $titles[2] }}</th>
+												    </tr>
+												  </thead>
+												  <tbody>
+												    @foreach($question->scaleQuestions as $scaleQuestion)
+												    <tr>
+												      <th scope="row">{{ $scaleQuestion->soru }}</th>
+												      <td></td>
+												      <td></td>
+												    </tr>
+												    @endforeach
+												  </tbody>
+												</table>
+
+			    							@break
+
+			    						@case(3)
+
+			    							<table id="tablePreview" class="table">
+												  <thead>
+												    <tr>
+												      <th>#</th>
+												      <th>{{ $titles[0] }}</th>
+												      <th>{{ $titles[1] }}</th>
+												      <th>{{ $titles[2] }}</th>
+												      <th>{{ $titles[3] }}</th>
+												      <th>{{ $titles[4] }}</th>
+												    </tr>
+												  </thead>
+												  <tbody>
+												    @foreach($question->scaleQuestions as $scaleQuestion)
+												    <tr>
+												      <th scope="row">{{ $scaleQuestion->soru }}</th>
+												      <td></td>
+												      <td></td>
+												    </tr>
+												    @endforeach
+												  </tbody>
+												</table>
+
+			    							@break
+
+			    						@case(4)
+
+			    							<table id="tablePreview" class="table">
+												  <thead>
+												    <tr>
+												      <th>#</th>
+												      <th>First Name</th>
+												      <th>Last Name</th>
+												      <th>Username</th>
+												      <th>Visits</th>
+												      <th>Age</th>
+												    </tr>
+												  </thead>
+												  <tbody>
+												    @foreach($question->scaleQuestions as $scaleQuestion)
+												    <tr>
+												      <th scope="row">{{ $scaleQuestion->soru }}</th>
+												      <td></td>
+												      <td></td>
+												    </tr>
+												    @endforeach
+												  </tbody>
+												</table>
+
+			    							@break
+
+			    						@case(5)
+
+												<table id="tablePreview" class="table">
+												  <thead>
+												    <tr>
+												      <th>#</th>
+												      <th>First Name</th>
+												      <th>Last Name</th>
+												      <th>Username</th>
+												      <th>Visits</th>
+												      <th>Age</th>
+												      <th>Country</th>
+												      <th>First Name</th>
+												      <th>Last Name</th>
+												      <th>Username</th>
+												      <th>Visits</th>
+												    </tr>
+												  </thead>
+
+												  <tbody>
+												    @foreach($question->scaleQuestions as $scaleQuestion)
+												    <tr>
+												      <th scope="row">{{ $scaleQuestion->soru }}</th>
+												      <td></td>
+												      <td></td>
+												    </tr>
+												    @endforeach
+												  </tbody>
+												</table>
+
+			    							@break
+
+			    						@default
+								        Something went wrong!
+										@endswitch
+									
+									@if($loop->last)
+										<button type="submit" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></button>
+									@else
+										<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
+									@endif
+								</div>
+							</div>
+						
+
+			      @break
+
+			    @default
+			        Something went wrong!
+			@endswitch
 	  </div>
-	</div>
+	@endforeach
+	
 
-	<div class="question col-sm-10 h-100 " id="2">
-	  <div class="row h-100 align-items-center">
-	  	<div class="col-sm-10 ml-5 ">
-	    <h2>Title of the question 2</h2>
-
-	    	<div class="form-check">
-			  <input class="form-check-input" type="radio" name="Radios" id="exampleRadios4" value="option1">
-			  <label class="form-check-label" for="exampleRadios4">
-			    Default radio
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="Radios" id="exampleRadios5" value="option2">
-			  <label class="form-check-label" for="exampleRadios5">
-			    Second default radio
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="Radios" id="exampleRadios6" value="option3" disabled>
-			  <label class="form-check-label" for="exampleRadios6">
-			    Disabled radio
-			  </label>
-			</div>
-			<a href="#" role="button" class="btn btn-outline-success btn-block mt-5" >Devam <i class="fas fa-play"></i></a>
-		</div>    
-	  </div>
-	</div>
 
 	<div class="question col-sm-10 h-100 " id="3">
 	  <div class="row h-100 align-items-center">
@@ -91,7 +324,14 @@
 	    $('.question').hide();
 	    nextQuestion.show(1000);
 	});
-
+	$(".other").on("keyup", function(e){ 
+		var checkid = this.id.split("-")[1];
+	    if(this.value!=""){ console.log($('#othercheck-'+checkid));
+	    	$('#othercheck-'+checkid).prop("checked", true);
+	    }else{
+	    	$('#othercheck-'+checkid).prop("checked", false);
+	    }
+	});
 </script>
 @endsection
 

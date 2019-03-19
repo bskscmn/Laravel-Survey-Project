@@ -17,7 +17,9 @@ Route::get('/', function () {
 Route::get('/survey/{anketid}', function () {
     return view('surveyscroll');
 })->name('surveyscroll');
-Route::post('/surveysubmit',['as'=>'surveysubmit','uses'=>'QuestionController@surveysubmit']);
+
+Route::get('/survey/{anketid}',['as'=>'survey','uses'=>'AnswerController@index']);
+Route::post('/survey/store/{anketid}',['as'=>'surveystore','uses'=>'AnswerController@store']);
 
 
 
