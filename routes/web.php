@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/survey/{anketid}', function () {
+    return view('surveyscroll');
+})->name('surveyscroll');
+Route::post('/surveysubmit',['as'=>'surveysubmit','uses'=>'QuestionController@surveysubmit']);
+
+
 
 //Auth::routes();
 Auth::routes(['register' => false]);
