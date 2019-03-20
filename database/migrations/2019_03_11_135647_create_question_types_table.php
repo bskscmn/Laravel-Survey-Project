@@ -14,7 +14,8 @@ class CreateQuestionTypesTable extends Migration
     public function up()
     {
         Schema::create('question_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->string('type');
             $table->timestamps();
         });

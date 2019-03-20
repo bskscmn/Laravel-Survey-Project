@@ -23,8 +23,8 @@ class RoleTableSeeder extends Seeder
         $role_proje->save();
 
         $role_onburo = new Role();
-        $role_onburo->name = 'Ön Büro';
-        $role_onburo->description = 'Ön büro ekranı';
+        $role_onburo->name = 'Anket';
+        $role_onburo->description = 'Anket ekranı';
         $role_onburo->save();
     }
 }

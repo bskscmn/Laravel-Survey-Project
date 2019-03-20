@@ -67,7 +67,7 @@
 							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
 									@foreach($question->choices as $choice)
-								    	<div class="form-check">
+								    <div class="form-check">
 										  <input class="form-check-input" type="radio" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
 										  <label class="form-check-label" for="{{ $choice->id }}">
 										    {{ $choice->choice }}
@@ -101,7 +101,7 @@
 							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
 									@foreach($question->choices as $choice)
-								    	<div class="form-check">
+								    <div class="form-check">
 										  <input class="form-check-input" type="checkbox" name="{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
 										  <label class="form-check-label" for="{{ $choice->id }}">
 										    {{ $choice->choice }}
@@ -152,8 +152,16 @@
 												  	@foreach($question->scaleQuestions as $scaleQuestion)
 												    <tr>
 												      <th scope="row">{{ $scaleQuestion->soru }}</th>
-												      <td></td>
-												      <td></td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[0] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[1] }}">
+																</div>
+												      </td>
 												    </tr>
 												    @endforeach
 												  </tbody>
@@ -176,8 +184,21 @@
 												    @foreach($question->scaleQuestions as $scaleQuestion)
 												    <tr>
 												      <th scope="row">{{ $scaleQuestion->soru }}</th>
-												      <td></td>
-												      <td></td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[0] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[1] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[2] }}">
+																</div>
+												      </td>
 												    </tr>
 												    @endforeach
 												  </tbody>
@@ -202,8 +223,31 @@
 												    @foreach($question->scaleQuestions as $scaleQuestion)
 												    <tr>
 												      <th scope="row">{{ $scaleQuestion->soru }}</th>
-												      <td></td>
-												      <td></td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[0] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[1] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[2] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[3] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[4] }}">
+																</div>
+												      </td>
 												    </tr>
 												    @endforeach
 												  </tbody>
@@ -217,19 +261,42 @@
 												  <thead>
 												    <tr>
 												      <th>#</th>
-												      <th>First Name</th>
-												      <th>Last Name</th>
-												      <th>Username</th>
-												      <th>Visits</th>
-												      <th>Age</th>
+												      <th>{{ $titles[0] }}</th>
+												      <th>{{ $titles[1] }}</th>
+												      <th>{{ $titles[2] }}</th>
+												      <th>{{ $titles[3] }}</th>
+												      <th>{{ $titles[4] }}</th>
 												    </tr>
 												  </thead>
 												  <tbody>
 												    @foreach($question->scaleQuestions as $scaleQuestion)
 												    <tr>
 												      <th scope="row">{{ $scaleQuestion->soru }}</th>
-												      <td></td>
-												      <td></td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[0] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[1] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[2] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[3] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[4] }}">
+																</div>
+												      </td>
 												    </tr>
 												    @endforeach
 												  </tbody>
@@ -243,16 +310,16 @@
 												  <thead>
 												    <tr>
 												      <th>#</th>
-												      <th>First Name</th>
-												      <th>Last Name</th>
-												      <th>Username</th>
-												      <th>Visits</th>
-												      <th>Age</th>
-												      <th>Country</th>
-												      <th>First Name</th>
-												      <th>Last Name</th>
-												      <th>Username</th>
-												      <th>Visits</th>
+												      <th>{{ $titles[0] }}</th>
+												      <th>{{ $titles[1] }}</th>
+												      <th>{{ $titles[2] }}</th>
+												      <th>{{ $titles[3] }}</th>
+												      <th>{{ $titles[4] }}</th>
+												      <th>{{ $titles[5] }}</th>
+												      <th>{{ $titles[6] }}</th>
+												      <th>{{ $titles[7] }}</th>
+												      <th>{{ $titles[8] }}</th>
+												      <th>{{ $titles[9] }}</th>
 												    </tr>
 												  </thead>
 
@@ -260,8 +327,56 @@
 												    @foreach($question->scaleQuestions as $scaleQuestion)
 												    <tr>
 												      <th scope="row">{{ $scaleQuestion->soru }}</th>
-												      <td></td>
-												      <td></td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[0] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[1] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[2] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[3] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[4] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[5] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[6] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[7] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[8] }}">
+																</div>
+												      </td>
+												      <td>
+												      	<div class="form-check">
+																  <input class="form-check-input" type="radio" name="sq-{{ $scaleQuestion->id }}" value="{{ $titles[9] }}">
+																</div>
+												      </td>
 												    </tr>
 												    @endforeach
 												  </tbody>
@@ -280,9 +395,21 @@
 									@endif
 								</div>
 							</div>
-						
 
 			      @break
+					
+					@case(6)
+
+							<div class="row h-100 align-items-center">
+								<div class="col-sm-12">
+
+									<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
+
+									<div class="form-group">
+								    <textarea class="form-control" name="{{ $question->id }}" rows="3"></textarea>
+								  </div
+
+			    	@break
 
 			    @default
 			        Something went wrong!

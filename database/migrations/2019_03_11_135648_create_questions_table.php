@@ -14,7 +14,8 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->integer('anket_id')->unsigned();
             $table->foreign('anket_id')->references('id')->on('ankets')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('question_type_id')->unsigned();
