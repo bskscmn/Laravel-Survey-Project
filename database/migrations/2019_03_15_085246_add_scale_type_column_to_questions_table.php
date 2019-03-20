@@ -27,7 +27,7 @@ class AddScaleTypeColumnToQuestionsTable extends Migration
     public function down()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->dropColumn(array('scale_type'));
+
         });
     }
 }
