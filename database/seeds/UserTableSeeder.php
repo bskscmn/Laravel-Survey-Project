@@ -17,22 +17,6 @@ class UserTableSeeder extends Seeder
         $role_proje = Role::where('name', 'Proje')->first();
         $role_onburo = Role::where('name', 'Anket')->first();
 
-        $user = new User();
-        $user->name = 'Ön Büro';
-        $user->username = 'onburo';
-        $user->email = 'onburo@example.com';
-        $user->password = bcrypt('111111');
-        $user->save();
-        $user->roles()->attach($role_onburo);
-
-        $admin = new User();
-        $admin->name = 'Proje Kullanıcısı';
-        $admin->username = 'proje';
-        $admin->email = 'proje@example.com';
-        $admin->password = bcrypt('111111');
-        $admin->save();
-        $admin->roles()->attach($role_proje);
-
         $author = new User();
         $author->name = 'Admin';
         $author->username = 'admin';
@@ -40,5 +24,21 @@ class UserTableSeeder extends Seeder
         $author->password = bcrypt('111111');
         $author->save();
         $author->roles()->attach($role_admin);
+
+        $proje = new User();
+        $proje->name = 'Proje Kullanıcısı';
+        $proje->username = 'proje';
+        $proje->email = 'proje@example.com';
+        $proje->password = bcrypt('111111');
+        $proje->save();
+        $proje->roles()->attach($role_proje);
+
+        $user = new User();
+        $user->name = 'Ön Büro';
+        $user->username = 'onburo';
+        $user->email = 'onburo@example.com';
+        $user->password = bcrypt('111111');
+        $user->save();
+        $user->roles()->attach($role_onburo); 
     }
 }
