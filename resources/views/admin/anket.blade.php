@@ -295,7 +295,7 @@
                                   <label for="modal-input-scaleType" class="col-md-2 col-form-label text-md-right">{{ __('Derece') }}</label>
 
                                   <div class="col-md-10">
-                                    <select id="modal-input-scaleType" name="scale_type_id" class="form-control{{ $errors->has('scale_type_id') ? ' is-invalid' : '' }}" >
+                                    <select id="modal-input-scaleType" name="scale_type" class="form-control{{ $errors->has('scale_type') ? ' is-invalid' : '' }}" >
                                       <option value="" disabled>--Seçiniz--</option>
                                       @foreach($scaleTypes as $scaleType)
                                         <option value="{{ $scaleType->id }}">{{ $scaleType->type }}</option>

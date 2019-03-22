@@ -17,7 +17,7 @@ class Question extends Model
     }
 
     public function scaleType() {
-         return $this->belongsTo('App\ScaleType'); 
+         return $this->belongsTo('App\ScaleType', 'scale_type'); 
     }
 
     public function scaleQuestions() {
@@ -26,5 +26,13 @@ class Question extends Model
 
     public function choices() {
          return $this->hasMany('App\Choice'); 
+    }
+
+    public function answers() {
+         return $this->hasMany('App\Answer'); 
+    }
+
+    public function scaleAnswers() {
+         return $this->hasMany('App\scaleAnswer'); 
     }
 }

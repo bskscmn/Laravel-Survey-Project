@@ -20,11 +20,13 @@ Route::get('/survey/{anketid}', function () {
 
 Route::get('/survey/{anketid}',['as'=>'survey','uses'=>'AnswerController@index']);
 Route::post('/survey/store/{anketid}',['as'=>'surveystore','uses'=>'AnswerController@store']);
-
+Route::get('/survey/end/{anketid}', function () {
+    return view('surveyend');
+})->name('surveyend');
 
 
 //Auth::routes();
-Auth::routes(['register' => false]);
+Auth::routes(['register' => false, 'reset' => false]);
 
 
 Route::group(['middleware' => 'auth'], function() {

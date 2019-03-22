@@ -11,4 +11,12 @@ class Anket extends Model
     public function questions() {
     	return $this->hasMany('App\Question'); 
     }
+
+    public function answers() {
+    	return $this->hasMany('App\Answer'); 
+    }
+
+    public function scaleAnswers() {
+    	return $this->hasMany('App\scaleAnswer'); 
+    }
 }
