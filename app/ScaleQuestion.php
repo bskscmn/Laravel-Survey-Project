@@ -11,4 +11,8 @@ class ScaleQuestion extends Model
     public function question() {
     	 return $this->belongsTo('App\Question'); 
     }
+
+    public function scaleAnswers() {
+    	return $this->hasMany('App\ScaleAnswer'); 
+    }
 }

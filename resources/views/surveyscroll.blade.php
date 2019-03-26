@@ -153,7 +153,7 @@
 										      @for($i=0; $i < $scale; $i++)
 								     				<td>
 											      	<div class="form-check">
-															  <input class="form-check-input" type="radio" name="scaleQuestionID-{{ $scaleQuestion->id }}" value="{{ $i+1 }}/{{ $scale }}">
+															  <input class="form-check-input" type="radio" name="scaleQuestionID-{{ $scaleQuestion->id }}" value="{{ $i+1 }}">
 															</div>
 											      </td>
 								      		@endfor

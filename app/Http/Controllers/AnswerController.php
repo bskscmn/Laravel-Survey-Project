@@ -95,12 +95,15 @@ class AnswerController extends Controller
 				    	}
 				        break;
 				    case 6:
-				        $answer = Answer::create([
-				            'user_id' => $userid,
-				            'anket_id' => $anketid,
-				            'question_id' => $qid,
-				            'input_value' => $val,
-				        ]);
+				    	if ($val) {
+					    	$answer = Answer::create([
+					            'user_id' => $userid,
+					            'anket_id' => $anketid,
+					            'question_id' => $qid,
+					            'input_value' => $val,
+					        ]);	
+				    	}
+				        
 				        break;
 				    default:
 				        return "Something went wrong";

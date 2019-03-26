@@ -66,5 +66,15 @@ Route::group(['middleware' => 'auth'], function() {
 
 	});
 
+	Route::group(['middleware' => 'roles', 'roles' => ['Analytics']], function() {
+
+		//Ankets
+		Route::get('/analytics',['as'=>'analytics.surveylist','uses'=>'AnalyticsController@index']);
+		Route::get('/analytics/show/{id}',['as'=>'analytics.analytics','uses'=>'AnalyticsController@show']);
+		Route::get('/analytics/other/{survey_id}/{id}',['as'=>'analytics.others','uses'=>'AnalyticsController@others']);
+		Route::get('/analytics/open/{survey_id}/{id}',['as'=>'analytics.opens','uses'=>'AnalyticsController@opens']);
+
+	});
+
 });
 

@@ -17,7 +17,7 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
                     <div class="col-lg-12">
-                      <h3 class="float-left">AnketSoruları</h3>
+                      <h3 class="float-left">Anket Soruları</h3>
                       <button  class="btn btn-success float-right" data-toggle="modal" data-target="#addNewQuestion"><i class="fas fa-question-circle"></i> Soru Ekle</button>
                     </div>
                   </div>

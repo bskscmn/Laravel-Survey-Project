@@ -14,17 +14,17 @@ class RoleTableSeeder extends Seeder
     {
         $role_admin = new Role();
         $role_admin->name = 'Admin';
-        $role_admin->description = 'Yönetici';
+        $role_admin->description = 'Administrator';
         $role_admin->save();
 
         $role_proje = new Role();
-        $role_proje->name = 'Proje';
-        $role_proje->description = 'Proje Ekranı';
+        $role_proje->name = 'Show';
+        $role_proje->description = 'Show Analytics';
         $role_proje->save();
 
         $role_onburo = new Role();
-        $role_onburo->name = 'Anket';
-        $role_onburo->description = 'Anket ekranı';
+        $role_onburo->name = 'Survey';
+        $role_onburo->description = 'Show Survey';
         $role_onburo->save();
     }
 }

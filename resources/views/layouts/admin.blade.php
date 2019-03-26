@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper" id="app">
 
   <!-- Main Header -->
@@ -66,7 +66,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <div class="float-left info">
           <p>{{ Auth::user()->name }}</p>
-          
         </div>
       </div>
 
@@ -103,6 +102,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="header">ANKET MENU</li>
           <li><a href="{{ route('admin.ankets') }}"><i class="fas fa-poll nav-icon"></i> Anketler</a></li>
         @endif
+        @if(Auth::user()->hasRole('Analytics')) 
+          <li class="header">ANALYTICS MENU</li>
+          <li><a href="{{ route('analytics.surveylist') }}"><i class="fas fa-poll nav-icon"></i> Anketler</a></li>
+        @endif
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -125,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <strong>{{ $message }}</strong>
     </div>
     @endif
-    
+
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
