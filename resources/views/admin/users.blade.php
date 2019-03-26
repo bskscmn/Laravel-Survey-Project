@@ -261,7 +261,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  <label for="modal-input-active" class="col-md-4 col-form-label text-md-right">{{ __('Actif') }}</label>
+                                  <label for="modal-input-active" class="col-md-4 col-form-label text-md-right">{{ __('Aktif') }}</label>
 
                                   <div class="col-md-6">
                                       <input id="modal-input-active" type="text" class="form-control{{ $errors->has('active') ? ' is-invalid' : '' }}" name="active" value="{{ old('active') }}" required autofocus>

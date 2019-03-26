@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/profile',['as'=>'profile','uses'=>'UserController@profile']);
+	Route::post('/profile/update',['as'=>'profileupdate','uses'=>'UserController@profileupdate']);
 
 	Route::group(['middleware' => 'roles', 'roles' => ['Admin']], function() {
 

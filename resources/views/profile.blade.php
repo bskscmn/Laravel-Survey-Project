@@ -24,7 +24,8 @@
                   <h5 class="widget-user-desc">{{ Auth::user()->username }}</h5>
                 </div>
                 <!-- form start -->
-                <form>
+                <form action="{{ route('profileupdate', Auth::user()->id)}}" method="post">
+                  @csrf
                   <div class="card-body">
                     <div class="form-group">
                       <label>Ad Soyad</label>
@@ -49,9 +50,8 @@
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
                   </div>
-                  @csrf
                 </form>
               </div>
             </div>

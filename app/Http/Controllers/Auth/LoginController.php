@@ -51,6 +51,7 @@ class LoginController extends Controller
         return [
             $field => $request->get($this->username()),
             'password' => $request->get('password'),
+            'active' => '1',
         ];
     }
 
@@ -84,4 +85,6 @@ class LoginController extends Controller
             'password' => 'required',
         ], $messages);
     }
+
+
 }

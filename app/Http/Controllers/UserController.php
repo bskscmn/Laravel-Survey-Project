@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Role;
+use Auth;
 
 class UserController extends Controller
 {
@@ -79,13 +80,47 @@ class UserController extends Controller
             'password' => 'nullable|sometimes|string|min:6',
         ], $messages);
 
-		if(isset($request['password'])) { $request['password'] =  Hash::make($request['password']); }
+		if($request['password']) { 
+            $request['password'] =  Hash::make($request['password']); 
+            $user->update($request->all());
+        }else{
+            $user->update($request->except('password'));
+        }
 
-        $user->update($request->all());
         $user->roles()->sync(Role::where('id', $request['role'])->first());
         $users = User::all();
         $roles = Role::all();
 	    return view('admin.users', ['users' => $users, 'roles' => $roles]);
+    }
+
+    public function profileupdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $messages = [
+            'name.required' => 'İsim alanı zorunludur.',
+            'username.required' => 'Kullanıcı adı alanı zorunludur',
+            'username.unique' => 'Kullanıcı adı zaten var.',
+            'email.required' => 'Geçerli bir e-posta giriniz.',
+            'email.unique' => 'E-posta zaten var.',
+            'password.min' => 'Şifre minimum 6 karakter olmalıdır.'
+        ];
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'nullable|sometimes|string|min:6',
+        ], $messages);
+
+        if($request['password']) { 
+            $request['password'] =  Hash::make($request['password']); 
+            $user->update($request->all());
+        }else{
+             $user->update($request->except('password'));
+        }
+
+        $roles = Role::all();
+        return view('profile', ['roles' => $roles])->with('success', 'Düzenlendi.');
     }
 
     public function destroy($id)
