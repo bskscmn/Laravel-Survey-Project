@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/survey/{anketid}', function () {
     return view('surveyscroll');
 })->name('surveyscroll');
