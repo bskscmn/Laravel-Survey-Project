@@ -40,9 +40,7 @@
                         <td class="thisusername">{{ $user->username }}</td>
                         <td class="thisemail">{{ $user->email }}</td>
                         <td class="thisrole">
-                          @foreach($user->roles as $urole)
-                          {{ $urole->name }} 
-                          @endforeach
+                          @foreach($user->roles as $urole){{ $urole->name }} @endforeach
                         </td>      
                         <td class="thisact">{{ $user->active }}</td>
                         <td>
@@ -65,7 +63,7 @@
       </div>
       <!-- Modal Add New User-->
         <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="addNewModalLabel">Kullanıcı Ekle</h5>
@@ -81,7 +79,7 @@
                               @csrf
 
                               <div class="form-group row">
-                                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ad') }}</label>
 
                                   <div class="col-md-6">
                                       <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -126,8 +124,8 @@
                                   <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Yetki') }}</label>
 
                                   <div class="col-md-6">
-                                    <select id="role" name="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" required>
-                                      <option value="" selected disabled>--Seçiniz--</option>
+                                    <select id="role" name="role[]" class="selectpicker form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" multiple required>
+                                      <option value="" selected disabled>-- Çoklu Seçim için Ctrl+ --</option>
                                       @foreach($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                       @endforeach
@@ -167,7 +165,7 @@
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-4">
                                       <button type="submit" class="btn btn-primary">
-                                          {{ __('Register') }}
+                                          {{ __('Ekle') }}
                                       </button>
                                   </div>
                               </div>
@@ -183,7 +181,7 @@
 
       <!-- Modal Edit User-->
         <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="edit-modal-label">Kullanıcı Düzenle</h5>
@@ -245,8 +243,8 @@
                                   <label for="modal-input-role" class="col-md-4 col-form-label text-md-right">{{ __('Yetki') }}</label>
 
                                   <div class="col-md-6">
-                                    <select id="modal-input-role" name="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" required>
-                                      <option value="" disabled>--Seçiniz--</option>
+                                    <select id="modal-input-role" name="role[]" class="selectpicker form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" multiple required>
+                                      <option value="" disabled>-- Çoklu Seçim için Ctrl+ --</option>
                                       @foreach($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                       @endforeach
@@ -331,26 +329,29 @@ $(document).ready(function() {
     var name = row.children(".thisname").text();
     var username = row.children(".thisusername").text();
     var thisemail = row.children(".thisemail").text();
-    var thisrole = row.children(".thisrole").text().trim();
     var thisact = row.children(".thisact").text();
+    var thisroletext = row.children(".thisrole").text().trim();
+    var thisroles = [];
+    thisroles = thisroletext.split(' ');
 
     $("#modal-input-id").val(id);
     $("#modal-input-name").val(name);
     $("#modal-input-username").val(username);
     $("#modal-input-email").val(thisemail);
     $("#modal-input-active").val(thisact);
+    console.log(thisroles);
 
     var selectObj = $("#modal-input-role");
 
     for (var i = 0; i < $("#modal-input-role option").length; i++) {
-          
+      thisroles.forEach(function(thisrole) {
         if (selectObj.find('option').eq(i).text() === thisrole) {
             selectObj.find('option').eq(i).prop('selected', true)
             return;
         }
+      });
     }
 
-    
   });
 
   // on modal hide

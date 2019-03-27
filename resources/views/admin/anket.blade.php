@@ -34,7 +34,7 @@
                       <th></th>
                     </tr>
                     @foreach($anket->questions as $question)
-                      <tr class="data-row">
+                      <tr class="data-row baseQuestionLine">
                         <td class="thisnumber">{{ $question->question_number }}</td>
                         <td class="thissoru">{{ $question->soru }} </td>
                         <td class="thistype">{{ $question->questionType->type }}</td>    
@@ -63,14 +63,14 @@
                       @if($question->questionType->id != 6)
 
                         @if($question->questionType->id == 5)
-                          <tr class="table-sm" >
+                          <tr class="table-sm baseQuestionLine">
                             <td></td>
                             <td class="thischoice table-secondary" colspan="2" id="scale-{{$question->id}}"> {{ $question->scaleType->type }} </td>
                             <td class="table-secondary">
                             </td> 
                           </tr>
                           @foreach($question->scaleQuestions as $scaleQuestion)
-                            <tr class="data-row table-sm" >
+                            <tr class="data-row table-sm trScaleQ" >
                               <td></td>
                               <td class="thischoice table-secondary" colspan="2">{{ $scaleQuestion->soru }}</td>
                               <td class="table-secondary">
@@ -112,7 +112,7 @@
                           @endforeach
 
                           @if($question->questionType->id == 3 || $question->questionType->id == 4)
-                            <tr class="table-sm" >
+                            <tr class="table-sm baseQuestionLine">
                               <td></td>
                               <td class="thischoice table-secondary" colspan="2">Diğer</td>
                               <td class="table-secondary">
@@ -291,7 +291,7 @@
                                   </div>
                               </div>  
 
-                              <div class="form-group row">
+                              <div class="form-group row" id="scaleSelectboxedit">
                                   <label for="modal-input-scaleType" class="col-md-2 col-form-label text-md-right">{{ __('Derece') }}</label>
 
                                   <div class="col-md-10">
@@ -490,45 +490,30 @@
 <script>
 $(document).ready(function() {
 
+  /**
+   * for New Question Modal -> Scale options show and hide
+   */
+  
   $('#addNewQuestion').on('shown.bs.modal', function () {
     $('#scaleSelectbox').hide();
 
     //function when select is changing. 
-   
-    $("#questionType").change( function() {
+    $("#questionType").on('change', function() {
         if ($("#questionType").val() == 5 ) { //Derecelendirme
            $("#scaleSelectbox").show();
         } else  {
-          document.querySelector('input[name="scaleType"]:checked').checked = false;
+          var checkedSelectTypeElement = document.querySelector('input[name="scaleType"]:checked');
+          if(checkedSelectTypeElement != null){
+            document.querySelector('input[name="scaleType"]:checked').checked = false; 
+          }
           $("#scaleSelectbox").hide();
         }
     });
   });
-$(document).on("click", ".edit-item", function () {
-  var questionTypeId = $(this).data('qtype_id');
-     
-  $('#edit-modal-question').on('shown.bs.modal', function () { 
-    if(questionTypeId == 5 ){
-      $('#scaleSelectboxedit').show();
-    }else{
-      $('#scaleSelectboxedit').hide();
-    }
 
-    //function when select is changing. 
-   
-    $("#modal-input-type").change( function() {
-        if ($("#modal-input-type").val() == 5 ) { //Derecelendirme
-           $("#scaleSelectboxedit").show();
-        } else  {
-          document.querySelector('input[name="scaleType"]:checked').checked = false;
-          $("#scaleSelectboxedit").hide();
-        }
-    });
-  });
-});
   
   /**
-   * for showing edit item popup
+   * for Question Edit Modal -> Scale options show and hide
    */
   // on modal edit question
   $(document).on('click', ".edit-item", function() {
@@ -539,12 +524,17 @@ $(document).on("click", ".edit-item", function () {
     var soru = row.children(".thissoru").text();
     var thistype = row.children(".thistype").text().trim();
     var thisScaleType = $('#scale-'+id).text().trim();
+    var questionTypeId = $(this).data('qtype_id'); 
+    
+
+    var selectObj = $("#modal-input-type");
+    var selectObj2 = $("#modal-input-scaleType");    
+
+    //Set form values for edit
 
     $("#modal-input-id").val(id);
     $("#modal-input-questionNumber").val(number);
     $("#modal-input-soru").val(soru);
-
-    var selectObj = $("#modal-input-type");
 
     for (var i = 0; i < $("#modal-input-type option").length; i++) {
           
@@ -552,7 +542,6 @@ $(document).on("click", ".edit-item", function () {
             selectObj.find('option').eq(i).prop('selected', true)
         }
     }
-    var selectObj2 = $("#modal-input-scaleType");
 
     for (var j = 0; j < $("#modal-input-scaleType option").length; j++) {
           
@@ -560,13 +549,69 @@ $(document).on("click", ".edit-item", function () {
             selectObj2.find('option').eq(j).prop('selected', true)
         }
     }
+
+    if(questionTypeId == 5 ){ //Scale Question
+      $('#scaleSelectboxedit').show();
+    }else{
+      $('#scaleSelectboxedit').hide();
+    }
+
+    // on question type change -> show hide scale type
+
+    selectObj.on('change', function() {
+
+        if ($("#modal-input-type").val() == 5 ) { //Scale Question
+           $("#scaleSelectboxedit").show();
+        } else  {
+          $('#modal-input-scaleType').prop('selectedIndex', 0);
+          $("#scaleSelectboxedit").hide();
+        }
+     
+    });
+    
+
+    /* Restrictions of question type edit
+     * If question has choices or scale questions selectbos will be disabled.
+     */
+    
+    if(questionTypeId == 1 || questionTypeId == 2) { 
+
+      var nextTR = $(this).closest('tr').next('tr');
+
+      if(nextTR.length != 0 && !nextTR.hasClass('baseQuestionLine')) { 
+        $('#modal-input-type').prop('disabled', 'disabled');
+      }else{
+        $('#modal-input-type').prop('disabled', false);
+      }
+
+    }else if(questionTypeId == 3 || questionTypeId == 4) { 
+
+      var nextTR = $(this).closest('tr').next('tr');
+
+      if(!nextTR.hasClass('baseQuestionLine')) {
+        $('#modal-input-type').prop('disabled', 'disabled');
+      }else{
+        $('#modal-input-type').prop('disabled', false);
+      }
+      
+    }else if(questionTypeId == 5){ 
+
+      var next2TR = $(this).closest('tr').next('tr').next('tr');
+
+      if(next2TR.length != 0 && !next2TR.hasClass('baseQuestionLine')){
+        $('#modal-input-type').prop('disabled', 'disabled');
+      }else{
+        $('#modal-input-type').prop('disabled', false);
+      }
+    
+    }else if(questionTypeId == 6){ 
+
+      $('#modal-input-type').prop('disabled', false);
+
+    }
     
   });
 
-  // on modal hide
-  $('#edit-modal-question').on('hide.bs.modal', function() {
-    $("#edit-form-question").trigger("reset");
-  });
 
   // on modal edit choice
   $(document).on('click', ".edit-choice", function() {
@@ -580,25 +625,30 @@ $(document).on("click", ".edit-item", function () {
     
   });
 
-  // on modal hide
+  // reset form on edit-modal-question hide 
+  $('#edit-modal-question').on('hide.bs.modal', function() {
+    $("#edit-form-question").trigger("reset");
+  });
+
+  // reset form on edit-modal-choice hide 
   $('#edit-modal-choice').on('hide.bs.modal', function() {
     $("#edit-form-choice").trigger("reset");
   });
  
 });
 
-
-
+  //Delete confirm alert
   function myFunction() {
       if(!confirm("Silmek istediğinize emin misiniz?"))
       event.preventDefault();
   }
+
+  // Set form hidden value for Add New Choice
   function setQuestionId($questionid) {
       $("#modal-input-questionid").val($questionid);
   }
 
-
-
+  // Set form hidden value for Add Scale Question
   function setQuestionIdScale($questionid) {
       $("#modal-input-questionid-scale").val($questionid);
   }

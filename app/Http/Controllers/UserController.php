@@ -32,6 +32,7 @@ class UserController extends Controller
 
     protected function store(Request $request)
     {
+
         $messages = [
             'name.required' => 'İsim alanı zorunludur.',
             'username.required' => 'Kullanıcı adı alanı zorunludur',
@@ -46,7 +47,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|integer',
+            'role' => 'required',
             'password' => 'required|string|min:6',
         ], $messages);
     
@@ -56,10 +57,13 @@ class UserController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        $user->roles()->attach(Role::where('id', $request['role'])->first());
+        foreach ($request->role as $role) {
+            $user->roles()->attach(Role::where('id', $role)->first());
+        }
+        
         $users = User::all();
         $roles = Role::all();
-	    return view('admin.users', ['users' => $users, 'roles' => $roles]);
+	    return view('welcome', ['users' => $users, 'roles' => $roles]);
     }
     public function update(Request $request)
     {
@@ -71,13 +75,15 @@ class UserController extends Controller
             'username.unique' => 'Kullanıcı adı zaten var.',
             'email.required' => 'Geçerli bir e-posta giriniz.',
             'email.unique' => 'E-posta zaten var.',
-            'password.min' => 'Şifre minimum 6 karakter olmalıdır.'
+            'password.min' => 'Şifre minimum 6 karakter olmalıdır.',
+            'role.required' => 'Yetki seçiniz.'
         ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,'.$user->id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|sometimes|string|min:6',
+            'role' => 'required',
         ], $messages);
 
 		if($request['password']) { 
@@ -86,8 +92,11 @@ class UserController extends Controller
         }else{
             $user->update($request->except('password'));
         }
-
-        $user->roles()->sync(Role::where('id', $request['role'])->first());
+        $user->roles()->detach();
+        foreach ($request->role as $role) {
+            $user->roles()->attach(Role::where('id', $role)->first());
+        }
+        
         $users = User::all();
         $roles = Role::all();
 	    return view('admin.users', ['users' => $users, 'roles' => $roles]);
@@ -126,8 +135,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        $user->roles()->detach();
         $user->delete();
-
         return redirect('/users')->with('success', 'Silindi.');
     }
 }
