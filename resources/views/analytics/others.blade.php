@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ $answers[0]->anket->name }}</h1>
+      <h1>{{ @$answers[0]->anket->name }}</h1>
     </section>
 
     <!-- Main content -->
@@ -28,7 +28,7 @@
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <th>{{ $answers[0]->question->soru }} <i class="fas fa-angle-right"></i> Diğer veriler: </th>
+                      <th>{{ @$answers[0]->question->soru }} <i class="fas fa-angle-right"></i> Diğer veriler: </th>
                     </tr>
                     @foreach($answers as $answer)
                       <tr class="data-row">
