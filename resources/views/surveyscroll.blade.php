@@ -13,15 +13,16 @@
 								<div class="col-sm-10 ml-5" id="questionID-{{ $question->id }}">
 					    		<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
-									@foreach($question->choices as $choice)
-								    	<div class="form-check">
-											  <input class="form-check-input" type="radio" name="questionID-{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}">
-											  <label class="form-check-label" for="{{ $choice->id }}">
-											    {{ $choice->choice }}
-											  </label>
-											</div>
-									@endforeach
-									
+									<div class="control-group">
+										@foreach($question->choices as $choice)
+									    <label class="control control-radio">
+									        {{ $choice->choice }}
+									            <input type="radio" name="questionID-{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}"/>
+									        <div class="control_indicator"></div>
+									    </label>
+									    @endforeach
+									</div>
+
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
 											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
@@ -43,16 +44,15 @@
 								<div class="col-sm-10  ml-5" id="questionID-{{ $question->id }}">
 
 						    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
-
-									@foreach($question->choices as $choice)
-							    	<div class="form-check">
-										  <input class="form-check-input" type="checkbox" name="questionID-{{ $question->id }}[]" id="{{ $choice->id }}" value="{{ $choice->id }}">
-										  <label class="form-check-label" for="{{ $choice->id }}">
-										    {{ $choice->choice }}
-										  </label>
-										</div>
-									@endforeach
-
+									<div class="control-group">
+										@foreach($question->choices as $choice)
+								        <label class="control control-checkbox">
+								            {{ $choice->choice }}
+								            <input type="checkbox" name="questionID-{{ $question->id }}[]" id="{{ $choice->id }}" value="{{ $choice->id }}">
+								            <div class="control_indicator"></div>
+								        </label>
+								        @endforeach
+								    </div>
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
 											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
@@ -75,21 +75,23 @@
 
 							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
-									@foreach($question->choices as $choice)
-								    <div class="form-check">
-										  <input class="form-check-input" type="radio" name="questionID-{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}" onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').value='';}">
-										  <label class="form-check-label" for="{{ $choice->id }}">
-										    {{ $choice->choice }}
-										  </label>
-										</div>
-									@endforeach
+									<div class="control-group">
+										@foreach($question->choices as $choice)
+									    <label class="control control-radio">
+									        {{ $choice->choice }}
+									            <input type="radio" name="questionID-{{ $question->id }}" id="{{ $choice->id }}" value="{{ $choice->id }}"/>
+									        <div class="control_indicator"></div>
+									    </label>
+									    @endforeach
 									
-									<div class="form-check">
-									  <input class="form-check-input" type="radio" name="questionID-{{ $question->id }}" id="othercheck-{{ $question->id }}" value="0"
-									  onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus(); $('#other-{{ $question->id }}').attr('required'); }else{ $('#other-{{ $question->id }}').removeAttr('required'); }">
-									  <label class="form-check-label" for="other-{{ $question->id }}">
-									    Diğer <input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
-									  </label>
+										<label class="control control-radio">
+									    	Diğer
+									  		<input type="radio" name="questionID-{{ $question->id }}" id="othercheck-{{ $question->id }}" value="0" onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus(); $('#other-{{ $question->id }}').attr('required'); }else{ $('#other-{{ $question->id }}').removeAttr('required'); }">
+									  		<div class="control_indicator"></div>
+									    </label>
+									    <input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
+									
+
 									</div>
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
@@ -114,22 +116,21 @@
 
 							    	<h2>{{ $question->question_number }}. {{ $question->soru }}</h2>
 
-									@foreach($question->choices as $choice)
-								    <div class="form-check">
-										  <input class="form-check-input" type="checkbox" name="questionID-{{ $question->id }}[]" id="{{ $choice->id }}" value="{{ $choice->id }}">
-										  <label class="form-check-label" for="{{ $choice->id }}">
-										    {{ $choice->choice }}
-										  </label>
-										</div>
-									@endforeach
-
-									<div class="form-check">
-									  <input class="form-check-input" type="checkbox" id="othercheck-{{ $question->id }}" name="questionID-{{ $question->id }}[]" value="0"  
-									  onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus();  $('#other-{{ $question->id }}').attr('required'); }else{ document.getElementById('other-{{ $question->id }}').value=''; $('#other-{{ $question->id }}').removeAttr('required'); }">
-									  <label class="form-check-label" for="other-{{ $question->id }}">
-									    Diğer
-									  </label> 
-									  <input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
+							    	<div class="control-group">
+										@foreach($question->choices as $choice)
+								        <label class="control control-checkbox">
+								            {{ $choice->choice }}
+								            <input type="checkbox" name="questionID-{{ $question->id }}[]" id="{{ $choice->id }}" value="{{ $choice->id }}">
+								            <div class="control_indicator"></div>
+								        </label>
+								        @endforeach
+										
+									    <label class="control control-checkbox">
+									  		Diğer
+									  		<input type="checkbox" id="othercheck-{{ $question->id }}" name="questionID-{{ $question->id }}[]" value="0" onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus();  $('#other-{{ $question->id }}').attr('required'); }else{ document.getElementById('other-{{ $question->id }}').value=''; $('#other-{{ $question->id }}').removeAttr('required'); }">
+									  		<div class="control_indicator"></div>
+									  	</label> 
+									  	<input type="text" class="form-control other" id="other-{{ $question->id }}" name="other-{{ $question->id }}" placeholder="Belirtiniz.">
 									</div>
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
@@ -169,14 +170,18 @@
 										  <tbody>
 										  	@foreach($question->scaleQuestions as $scaleQuestion)
 										    <tr>
-										      <th scope="row">{{ $scaleQuestion->soru }}</th>
-										      @for($i=0; $i < $scale; $i++)
-								     				<td>
-											      	<div class="form-check">
-															  <input class="form-check-input" type="radio" name="scaleQuestionID-{{ $scaleQuestion->id }}" value="{{ $i+1 }}">
-															</div>
-											      </td>
-								      		@endfor
+										      	<th scope="row">{{ $scaleQuestion->soru }}</th>
+										      	<div class="control-group">
+											      	@for($i=0; $i < $scale; $i++)
+									     			<td>
+												      	<label class="control control-radio">
+															<input type="radio" name="scaleQuestionID-{{ $scaleQuestion->id }}" value="{{ $i+1 }}">
+															<div class="control_indicator"></div>
+														</label>
+												     </td>
+									      			@endfor
+								      			</div>
+								      		</tr>
 										    @endforeach
 										  </tbody>
 										</table>

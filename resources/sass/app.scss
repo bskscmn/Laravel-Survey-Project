@@ -6,6 +6,16 @@
 @import 'variables';
 // Variables -> Fontawesome
 
+//Bootstrap Custom
+$theme-colors: (
+  "primary":    #067d86,
+  "success":    #00484e,
+  "info":       #03a8b7,
+  "danger":		#cf0701
+
+);
+
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
