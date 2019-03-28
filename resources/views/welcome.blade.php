@@ -18,7 +18,7 @@
                                 <div class="clearfix text-center">
                                 	<p style="margin-top: 15px">{{ date('d-m-Y', strtotime( $survey->created_at)) }}</p>
                                     <p class="pull-right">
-                                        <a href="{{ route('survey', 1) }}" class="btn btn-success btn-sm ad-click-event">
+                                        <a href="{{ route('survey', $survey->id) }}" class="btn btn-success btn-sm ad-click-event">
                                             Anketi Başlat <i class="fas fa-play "></i>
                                         </a>
                                     </p>
