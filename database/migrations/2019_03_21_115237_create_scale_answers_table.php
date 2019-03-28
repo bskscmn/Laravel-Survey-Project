@@ -17,8 +17,8 @@ class CreateScaleAnswersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('anket_id')->unsigned();
-            $table->foreign('anket_id')->references('id')->on('ankets')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('survey_id')->unsigned();
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('scale_question_id')->unsigned();
             $table->foreign('scale_question_id')->references('id')->on('scale_questions')->onDelete('cascade')->onUpdate('cascade');
             $table->string('answer');

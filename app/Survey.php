@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Anket extends Model
+class Survey extends Model
 {
 	protected $guarded = array();
 

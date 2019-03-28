@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Anket;
+use App\Survey;
 use App\QuestionType;
 use App\ScaleType;
 
-class AnketController extends Controller
+class SurveyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class AnketController extends Controller
      */
     public function index()
     {
-    	$ankets = Anket::all();
-        return view('admin.ankets', compact('ankets'));
+    	$surveys = Survey::all();
+        return view('admin.surveys', compact('surveys'));
     }
 
     /**
@@ -36,12 +36,12 @@ class AnketController extends Controller
             'name' => 'required|string|max:255',
         ], $messages);
     
-        $anket = Anket::create([
+        $survey = Survey::create([
             'name' => $request['name'],
         ]);
 
-        $ankets = Anket::all();
-	    return view('admin.ankets', compact('ankets'));
+        $surveys = Survey::all();
+	    return view('admin.surveys', compact('surveys'));
     }
 
     /**
@@ -52,10 +52,10 @@ class AnketController extends Controller
      */
     public function show($id)
     {
-    	$anket = Anket::findOrFail($id);
+    	$survey = Survey::findOrFail($id);
         $questionTypes = QuestionType::all();
         $scaleTypes = ScaleType::all();
-        return view('admin.anket', compact('anket', 'questionTypes', 'scaleTypes'));
+        return view('admin.survey', compact('survey', 'questionTypes', 'scaleTypes'));
     }
 
     /**
@@ -66,7 +66,7 @@ class AnketController extends Controller
      */
     public function update(Request $request)
     {
-        $anket = Anket::findOrFail($request['id']);
+        $survey = Survey::findOrFail($request['id']);
 
         $messages = [
             'name.required' => 'Anket alanı zorunludur.',
@@ -75,10 +75,10 @@ class AnketController extends Controller
             'name' => 'required|string|max:255',
         ], $messages);
 
-        $anket->update($request->all());
+        $survey->update($request->all());
        
-       $ankets = Anket::all();
-	   return view('admin.ankets', compact('ankets'));
+       $surveys = Survey::all();
+	   return view('admin.surveys', compact('surveys'));
     }
 
     /**
@@ -89,9 +89,9 @@ class AnketController extends Controller
      */
     public function destroy($id)
     {
-        $anket = Anket::findOrFail($id);
-        $anket->delete();
+        $survey = Survey::findOrFail($id);
+        $survey->delete();
 
-        return redirect('/ankets')->with('success', 'Silindi.');
+        return redirect('/surveys')->with('success', 'Silindi.');
     }
 }

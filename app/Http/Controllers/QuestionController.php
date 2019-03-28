@@ -16,7 +16,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $anketid)
+    public function store(Request $request, $surveyid)
     {
         $messages = [
             'questionNumber.required' => 'Soru no alanı zorunludur.',
@@ -30,10 +30,10 @@ class QuestionController extends Controller
         ], $messages);
 
         if($request['questionType']==5 && $request['scaleType']==null){
-            return redirect()->to('/ankets/show/'.$anketid)->with('error','Derecelendirme ölçütü seçiniz!');
+            return redirect()->to('/surveys/show/'.$surveyid)->with('error','Derecelendirme ölçütü seçiniz!');
         }else{
             $question = Question::create([
-                'anket_id' => $anketid,
+                'survey_id' => $surveyid,
                 'question_type_id' => $request['questionType'],
                 'question_number' => $request['questionNumber'],
                 'soru' => $request['soru'],
@@ -44,7 +44,7 @@ class QuestionController extends Controller
             }
 
             $questionTypes = QuestionType::all();
-            return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+            return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
         }
 
         
@@ -58,7 +58,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $anketid)
+    public function update(Request $request, $surveyid)
     {
         $question = Question::findOrFail($request['id']);
 
@@ -77,7 +77,7 @@ class QuestionController extends Controller
         $question->update($request->all());
         
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
     }
 
     /**
@@ -89,11 +89,11 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        $anketid = $question->anket_id;
+        $surveyid = $question->survey_id;
         $question->delete();
 
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
     }
     
 }

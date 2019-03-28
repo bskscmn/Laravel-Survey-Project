@@ -12,13 +12,13 @@
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('/survey/{anketid}', function () {
+Route::get('/survey/{surveyid}', function () {
     return view('surveyscroll');
 })->name('surveyscroll');
 
-Route::get('/survey/{anketid}',['as'=>'survey','uses'=>'AnswerController@index']);
-Route::post('/survey/store/{anketid}',['as'=>'surveystore','uses'=>'AnswerController@store']);
-Route::get('/survey/end/{anketid}', function () {
+Route::get('/survey/{surveyid}',['as'=>'survey','uses'=>'AnswerController@index']);
+Route::post('/survey/store/{surveyid}',['as'=>'surveystore','uses'=>'AnswerController@store']);
+Route::get('/survey/end/{surveyid}', function () {
     return view('surveyend');
 })->name('surveyend');
 
@@ -42,24 +42,24 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::delete('user/delete/{id}', ['as' => 'admin.userdestroy', 'uses' => 'UserController@destroy']);
 
 		//Ankets
-		Route::get('/ankets',['as'=>'admin.ankets','uses'=>'AnketController@index']);
-		Route::post('/ankets/store',['as'=>'admin.anketstore','uses'=>'AnketController@store']);
-		Route::post('/ankets/edit',['as'=>'admin.anketedit','uses'=>'AnketController@update']);
-		Route::delete('ankets/delete/{id}', ['as' => 'admin.anketdestroy', 'uses' => 'AnketController@destroy']);
-		Route::get('/ankets/show/{id}',['as'=>'admin.anket','uses'=>'AnketController@show']);
+		Route::get('/surveys',['as'=>'admin.surveys','uses'=>'SurveyController@index']);
+		Route::post('/surveys/store',['as'=>'admin.surveystore','uses'=>'SurveyController@store']);
+		Route::post('/surveys/edit',['as'=>'admin.surveyedit','uses'=>'SurveyController@update']);
+		Route::delete('surveys/delete/{id}', ['as' => 'admin.surveydestroy', 'uses' => 'SurveyController@destroy']);
+		Route::get('/surveys/show/{id}',['as'=>'admin.survey','uses'=>'SurveyController@show']);
 
 		//Questions
-		Route::post('/questions/store/{anketid}',['as'=>'admin.questionstore','uses'=>'QuestionController@store']);
-		Route::post('/questions/edit/{anketid}',['as'=>'admin.questionedit','uses'=>'QuestionController@update']);
+		Route::post('/questions/store/{surveyid}',['as'=>'admin.questionstore','uses'=>'QuestionController@store']);
+		Route::post('/questions/edit/{surveyid}',['as'=>'admin.questionedit','uses'=>'QuestionController@update']);
 		Route::delete('questions/delete/{id}', ['as' => 'admin.questiondestroy', 'uses' => 'QuestionController@destroy']);
 
 		//Choices
-		Route::post('/choices/store/{anketid}',['as'=>'admin.choicestore','uses'=>'ChoiceController@store']);
-		Route::post('/choices/edit/{anketid}',['as'=>'admin.choiceedit','uses'=>'ChoiceController@update']);
+		Route::post('/choices/store/{surveyid}',['as'=>'admin.choicestore','uses'=>'ChoiceController@store']);
+		Route::post('/choices/edit/{surveyid}',['as'=>'admin.choiceedit','uses'=>'ChoiceController@update']);
 		Route::delete('choices/delete/{id}', ['as' => 'admin.choicedestroy', 'uses' => 'ChoiceController@destroy']);
 
 		//Scale
-		Route::post('/scales/store/{anketid}',['as'=>'admin.createscalequestion','uses'=>'ChoiceController@storeScaleQuestion']);
+		Route::post('/scales/store/{surveyid}',['as'=>'admin.createscalequestion','uses'=>'ChoiceController@storeScaleQuestion']);
 		Route::delete('scales/delete/{id}', ['as' => 'admin.scalequestiondestroy', 'uses' => 'ChoiceController@destroyScaleQuestion']);
 
 

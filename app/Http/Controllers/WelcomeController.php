@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Anket;
+use App\Survey;
 
 class WelcomeController extends Controller
 {
     public function index()
     {
-        $surveys = Anket::all();
+        $surveys = Survey::all();
 	    return view('welcome', ['surveys' => $surveys]);
     }
 }

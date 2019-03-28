@@ -17,7 +17,7 @@ class ChoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $anketid)
+    public function store(Request $request, $surveyid)
     {
         $messages = [
             'choice.required' => 'Seçenek alanı zorunludur.',
@@ -32,7 +32,7 @@ class ChoiceController extends Controller
         ]);
 
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
     }
 
      /**
@@ -41,7 +41,7 @@ class ChoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeScaleQuestion(Request $request, $anketid)
+    public function storeScaleQuestion(Request $request, $surveyid)
     {
         $messages = [
             'questionNumber.required' => 'Soru no alanı zorunludur.',
@@ -53,14 +53,14 @@ class ChoiceController extends Controller
         ], $messages);
 
         $scaleQuestion = ScaleQuestion::create([
-            'anket_id' => $anketid,
+            'survey_id' => $surveyid,
             'question_id' => $request['question_id'],
             'question_number' => $request['questionNumber'],
             'soru' => $request['soru'],
         ]);
 
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
        
     }
 
@@ -70,7 +70,7 @@ class ChoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $anketid)
+    public function update(Request $request, $surveyid)
     {
         $choice = Choice::findOrFail($request['id']);
 
@@ -84,7 +84,7 @@ class ChoiceController extends Controller
         $choice->update($request->all());
         
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$anketid)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
     }
 
     /**
@@ -101,7 +101,7 @@ class ChoiceController extends Controller
         $choice->delete();
 
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$question->anket_id)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$question->survey_id)->with(compact('questionTypes'));
     }
     /**
      * Remove the specified resource from storage.
@@ -117,6 +117,6 @@ class ChoiceController extends Controller
         $scaleQuestion->delete();
 
         $questionTypes = QuestionType::all();
-        return redirect()->to('/ankets/show/'.$question->anket_id)->with(compact('questionTypes')); 
+        return redirect()->to('/surveys/show/'.$question->survey_id)->with(compact('questionTypes'));
     }
 }

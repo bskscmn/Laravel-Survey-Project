@@ -8,8 +8,8 @@ class Question extends Model
 {
 	protected $guarded = array();
 
-	public function anket() {
-    	 return $this->belongsTo('App\Anket'); 
+	public function survey() {
+    	 return $this->belongsTo('App\Survey');
     }
 
     public function questionType() {

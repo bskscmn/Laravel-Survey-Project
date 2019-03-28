@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ @$answers[0]->anket->name }}</h1>
+      <h1>{{ @$answers[0]->survey->name }}</h1>
     </section>
 
     <!-- Main content -->

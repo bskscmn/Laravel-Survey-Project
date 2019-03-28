@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li><a href="{{ route('admin.users') }}"><i class="nav-icon fas fa-users"></i> <span>Kullanıcılar</span></a></li>
 
           <li class="header">ANKET MENU</li>
-          <li><a href="{{ route('admin.ankets') }}"><i class="nav-icon fas fa-poll"></i> <span>Anketler</span></a></li>
+          <li><a href="{{ route('admin.surveys') }}"><i class="nav-icon fas fa-poll"></i> <span>Anketler</span></a></li>
         @endif
         @if(Auth::user()->hasRole('Analytics')) 
           <li class="header">ANALYTICS MENU</li>

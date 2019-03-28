@@ -16,8 +16,8 @@ class CreateScaleQuestionsTable extends Migration
         Schema::create('scale_questions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('anket_id')->unsigned();
-            $table->foreign('anket_id')->references('id')->on('ankets')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('survey_id')->unsigned();
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('question_number')->default('1');

@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ $anket->name }}</h1>
+      <h1>{{ $survey->name }}</h1>
     </section>
 
     <!-- Main content -->
@@ -33,7 +33,7 @@
                       <th>Soru Tipi</th>
                       <th></th>
                     </tr>
-                    @foreach($anket->questions as $question)
+                    @foreach($survey->questions as $question)
                       <tr class="data-row baseQuestionLine">
                         <td class="thisnumber">{{ $question->question_number }}</td>
                         <td class="thissoru">{{ $question->soru }} </td>
@@ -149,7 +149,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.questionstore', $anket->id ) }}">
+                        <form method="POST" action="{{ route('admin.questionstore', $survey->id ) }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('No') }}</label>
@@ -240,7 +240,7 @@
                   <div class="card">
 
                       <div class="card-body">
-                          <form id="edit-form-question" method="POST" action="{{ route('admin.questionedit', $anket->id) }}">
+                          <form id="edit-form-question" method="POST" action="{{ route('admin.questionedit', $survey->id) }}">
                               @csrf
                               <input type="hidden" id="modal-input-id" name="id" value="">
 
@@ -341,7 +341,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.choicestore', $anket->id ) }}">
+                        <form method="POST" action="{{ route('admin.choicestore', $survey->id ) }}">
                             @csrf
                             <input type="hidden" id="modal-input-questionid" name="question_id" value="">
                             
@@ -388,7 +388,7 @@
                   <div class="card">
 
                       <div class="card-body">
-                          <form id="edit-form-choice" method="POST" action="{{ route('admin.choiceedit', $anket->id) }}">
+                          <form id="edit-form-choice" method="POST" action="{{ route('admin.choiceedit', $survey->id) }}">
                               @csrf
                               <input type="hidden" id="modal-input-choiceid" name="id" value="">
 
@@ -435,7 +435,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.createscalequestion', $anket->id ) }}">
+                        <form method="POST" action="{{ route('admin.createscalequestion', $survey->id ) }}">
                             @csrf
                             <input type="hidden" id="modal-input-questionid-scale" name="question_id" value="">
                             <div class="form-group row">

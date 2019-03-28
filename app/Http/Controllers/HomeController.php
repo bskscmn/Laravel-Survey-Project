@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Anket;
+use App\Survey;
 
 class HomeController extends Controller
 {
@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $surveys = Anket::all();
+        $surveys = Survey::all();
         return view('admin/home', compact('surveys'));
     }
 }

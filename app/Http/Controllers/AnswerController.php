@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Answer;
 use App\ScaleAnswer;
-use App\Anket;
+use App\Survey;
 use App\Question;
 use App\ScaleQuestion;
 
@@ -16,14 +16,14 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($anketid)
+    public function index($surveyid)
     {
-    	$survey = Anket::findOrFail($anketid);
+    	$survey = Survey::findOrFail($surveyid);
         return view('surveyscroll', compact('survey'));
     }
 
 
-    public function store(Request $request, $anketid)
+    public function store(Request $request, $surveyid)
     {
    
     	$userid = Answer::max('user_id') +1;
@@ -41,7 +41,7 @@ class AnswerController extends Controller
 				    case 1:
 				    	$answer = Answer::create([
 				            'user_id' => $userid,
-				            'anket_id' => $anketid,
+				            'survey_id' => $surveyid,
 				            'question_id' => $qid,
 				            'choice_id' => $val,
 				        ]);
@@ -50,7 +50,7 @@ class AnswerController extends Controller
 				    	foreach($val as $value) {
 					        $answer = Answer::create([
 					            'user_id' => $userid,
-					            'anket_id' => $anketid,
+					            'survey_id' => $surveyid,
 					            'question_id' => $qid,
 					            'choice_id' => $value,
 					        ]);
@@ -60,7 +60,7 @@ class AnswerController extends Controller
 				    	if($val!=0){
 				    		$answer = Answer::create([
 					            'user_id' => $userid,
-					            'anket_id' => $anketid,
+					            'survey_id' => $surveyid,
 					            'question_id' => $qid,
 					            'choice_id' => $val,
 					        ]);
@@ -68,7 +68,7 @@ class AnswerController extends Controller
 				    		$other="other-".$qid;
 				    		$answer = Answer::create([
 					            'user_id' => $userid,
-					            'anket_id' => $anketid,
+					            'survey_id' => $surveyid,
 					            'question_id' => $qid,
 					            'input_value' => $request->$other,
 					        ]);
@@ -79,7 +79,7 @@ class AnswerController extends Controller
 			    			if($value!=0){
 						        $answer = Answer::create([
 						            'user_id' => $userid,
-						            'anket_id' => $anketid,
+						            'survey_id' => $surveyid,
 						            'question_id' => $qid,
 						            'choice_id' => $value,
 						        ]);
@@ -87,7 +87,7 @@ class AnswerController extends Controller
 					    		$other="other-".$qid;
 					    		$answer = Answer::create([
 						            'user_id' => $userid,
-						            'anket_id' => $anketid,
+						            'survey_id' => $surveyid,
 						            'question_id' => $qid,
 						            'input_value' => $request->$other,
 						        ]);
@@ -98,7 +98,7 @@ class AnswerController extends Controller
 				    	if ($val) {
 					    	$answer = Answer::create([
 					            'user_id' => $userid,
-					            'anket_id' => $anketid,
+					            'survey_id' => $surveyid,
 					            'question_id' => $qid,
 					            'input_value' => $val,
 					        ]);	
@@ -114,14 +114,14 @@ class AnswerController extends Controller
 	        	$scaleQuestion = ScaleQuestion::findOrFail($sqid);
 	        	$answer = ScaleAnswer::create([
 		            'user_id' => $userid,
-		            'anket_id' => $anketid,
+		            'survey_id' => $surveyid,
 		            'scale_question_id' => $sqid,
 		            'answer' => $val,
 		        ]);
 	        }
 	       
 	    }
-     	$anket = Anket::findOrFail($anketid);
-	    return view('surveyend', compact('anket'));
+     	$survey = Survey::findOrFail($surveyid);
+	    return view('surveyend', compact('survey'));
     }
 }

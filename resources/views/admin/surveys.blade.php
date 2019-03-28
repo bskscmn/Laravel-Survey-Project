@@ -29,15 +29,15 @@
                       <th>Ad</th>
                       <th></th>
                     </tr>
-                    @foreach($ankets as $anket)
+                    @foreach($surveys as $survey)
                       <tr class="data-row">
-                        <td class="thisid">{{ $anket->id }}</td>
-                        <td class="thisname">{{ $anket->name }}</td>
+                        <td class="thisid">{{ $survey->id }}</td>
+                        <td class="thisname">{{ $survey->name }}</td>
                         <td>
                           <div class="btn-group" role="group" aria-label="Buttons group">
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.anket', $anket->id)}}" role="button"><i class="fas fa-eye"></i></a>
-                            <button id="{{ $anket->id }}" data-item-id="{{ $anket->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-edit"></i></button>
-                            <form action="{{ route('admin.anketdestroy', $anket->id)}}" method="post">
+                            <a class="btn btn-primary btn-sm" href="{{ route('admin.survey', $survey->id)}}" role="button"><i class="fas fa-eye"></i></a>
+                            <button id="{{ $survey->id }}" data-item-id="{{ $survey->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-edit"></i></button>
+                            <form action="{{ route('admin.surveydestroy', $survey->id)}}" method="post">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-danger btn-sm" type="submit" onclick="return myFunction();"><i class="fa fa-trash"></i></button>
@@ -68,11 +68,11 @@
                   <div class="card">
 
                       <div class="card-body">
-                          <form method="POST" action="{{ route('admin.anketstore') }}">
+                          <form method="POST" action="{{ route('admin.surveystore') }}">
                               @csrf
 
                               <div class="form-group row">
-                                  <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Anket') }}</label>
+                                  <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Survey') }}</label>
 
                                   <div class="col-md-8">
                                       <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -116,7 +116,7 @@
                   <div class="card">
 
                       <div class="card-body">
-                          <form id="edit-form" method="POST" action="{{ route('admin.anketedit') }}">
+                          <form id="edit-form" method="POST" action="{{ route('admin.surveyedit') }}">
                               @csrf
                               <input type="hidden" id="modal-input-id" name="id" value="">
 
