@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c408257e-0ad7-412a-a772-1819ddf5a250" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Anket.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Survey.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnalyticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnalyticsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SurveyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChoiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChoiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Question.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ScaleAnswer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ScaleAnswer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_11_131329_create_ankets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_11_131329_create_surveys_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_11_135648_create_questions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_11_135648_create_questions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_15_081943_create_scale_questions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_15_081943_create_scale_questions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_21_115208_create_answers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_21_115208_create_answers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_21_115237_create_scale_answers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_21_115237_create_scale_answers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/AnketSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SurveySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/anket.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/survey.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/ankets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/surveys.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/analytics/opens.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/analytics/opens.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/analytics/others.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/analytics/others.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/surveyend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/surveyend.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -308,12 +284,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553768056804</updated>
-      <workItem from="1553768058321" duration="2607000" />
+      <workItem from="1553768058321" duration="3823000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2607000" />
+    <option name="totallyTimeSpent" value="3823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="267" y="26" width="1388" height="1000" extended-state="0" />
