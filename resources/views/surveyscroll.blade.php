@@ -3,7 +3,10 @@
 @section('content')
 <form action="{{ route('surveystore', $survey->id)}}" method="post" class="col-sm-12 h-100 " name="surveyform">
 	@csrf
-	@foreach($survey->questions as $question)
+	@if( $survey->questions->count() == 0 )
+		Ankete Soru eklenmedi!
+	@else
+		@foreach($survey->questions as $question)
 		<div class="question col-sm-11 h-100" id="question-{{$question->question_number}}">
 		  	<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Anket Ana Sayfa</button></a>
 			@switch($question->question_type_id)
@@ -232,6 +235,7 @@
 			@endswitch
 	  </div>
 	@endforeach
+	@endif
 	
 </form> 	
 
