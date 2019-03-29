@@ -24,6 +24,6 @@ class CheckRole
         if ($request->user()->hasAnyRole($roles) || !$roles){
             return $next($request);
         }
-         return response("Yetkisiz giriş!", 401);
+        return response("Yetkisiz giriş!", 401);
     }
 }

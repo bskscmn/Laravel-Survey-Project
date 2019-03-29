@@ -12,10 +12,6 @@
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('/survey/{surveyid}', function () {
-    return view('surveyscroll');
-})->name('surveyscroll');
-
 Route::get('/survey/{surveyid}',['as'=>'survey','uses'=>'AnswerController@index']);
 Route::post('/survey/store/{surveyid}',['as'=>'surveystore','uses'=>'AnswerController@store']);
 Route::get('/survey/end/{surveyid}', function () {

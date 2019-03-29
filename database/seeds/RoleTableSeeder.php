@@ -18,13 +18,8 @@ class RoleTableSeeder extends Seeder
         $role_admin->save();
 
         $role_proje = new Role();
-        $role_proje->name = 'Show';
+        $role_proje->name = 'Analytics';
         $role_proje->description = 'Show Analytics';
         $role_proje->save();
-
-        $role_onburo = new Role();
-        $role_onburo->name = 'Survey';
-        $role_onburo->description = 'Show Survey';
-        $role_onburo->save();
     }
 }

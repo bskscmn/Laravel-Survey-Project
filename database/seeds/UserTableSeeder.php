@@ -14,8 +14,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $role_admin = Role::where('name', 'Admin')->first();
-        $role_proje = Role::where('name', 'Proje')->first();
-        $role_onburo = Role::where('name', 'Anket')->first();
+        $role_analytics = Role::where('name', 'Analytics')->first();
 
         $author = new User();
         $author->name = 'Admin';
@@ -25,20 +24,13 @@ class UserTableSeeder extends Seeder
         $author->save();
         $author->roles()->attach($role_admin);
 
-        $proje = new User();
-        $proje->name = 'Proje Kullanıcısı';
-        $proje->username = 'proje';
-        $proje->email = 'proje@example.com';
-        $proje->password = bcrypt('111111');
-        $proje->save();
-        $proje->roles()->attach($role_proje);
+        $analytics = new User();
+        $analytics->name = 'Proje Kullanıcısı';
+        $analytics->username = 'proje';
+        $analytics->email = 'proje@example.com';
+        $analytics->password = bcrypt('111111');
+        $analytics->save();
+        $proje->roles()->attach($role_analytics);
 
-        $user = new User();
-        $user->name = 'Ön Büro';
-        $user->username = 'onburo';
-        $user->email = 'onburo@example.com';
-        $user->password = bcrypt('111111');
-        $user->save();
-        $user->roles()->attach($role_onburo); 
     }
 }
