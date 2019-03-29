@@ -23,6 +23,7 @@ class UserTableSeeder extends Seeder
         $author->password = bcrypt('111111');
         $author->save();
         $author->roles()->attach($role_admin);
+        $author->roles()->attach($role_analytics);
 
         $analytics = new User();
         $analytics->name = 'Proje Kullanıcısı';
@@ -30,7 +31,7 @@ class UserTableSeeder extends Seeder
         $analytics->email = 'proje@example.com';
         $analytics->password = bcrypt('111111');
         $analytics->save();
-        $proje->roles()->attach($role_analytics);
+        $analytics->roles()->attach($role_analytics);
 
     }
 }
