@@ -4,7 +4,12 @@
 <form action="{{ route('surveystore', $survey->id)}}" method="post" class="col-sm-12 h-100 " name="surveyform">
 	@csrf
 	@if( $survey->questions->count() == 0 )
-		Ankete Soru eklenmedi!
+		<div class="col-sm-11 h-100">
+			<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Anket Ana Sayfa</button></a>
+			<div class="row h-100 align-items-center">
+				<span class="m-auto">Ankete Soru eklenmedi!</span>
+			</div>
+		</div>
 	@else
 		@foreach($survey->questions as $question)
 		<div class="question col-sm-11 h-100" id="question-{{$question->question_number}}">
