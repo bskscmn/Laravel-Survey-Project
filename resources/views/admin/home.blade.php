@@ -19,7 +19,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h3>Anketler</h3>
+                    <h3>Surveys</h3>
                     @foreach($surveys as $survey)
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -29,7 +29,7 @@
                             <div class="info-box-content">
                               <span class="info-box-text">{{ $survey->name }}</span>
                               <span class="info-box-text">{{ date('d-m-Y', strtotime($survey->created_at)) }} </span>
-                              <span class="info-box-number"><small>#</small>{{ $survey->answers->groupBy('user_id')->count() }} <small>katılım.</small></span>
+                              <span class="info-box-number"><small>#</small>{{ $survey->answers->groupBy('user_id')->count() }} <small>participant.</small></span>
                             </div>
                             <!-- /.info-box-content -->
                           </div>

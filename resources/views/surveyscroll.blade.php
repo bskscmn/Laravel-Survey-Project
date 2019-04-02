@@ -5,15 +5,15 @@
 	@csrf
 	@if( $survey->questions->count() == 0 )
 		<div class="col-sm-11 h-100">
-			<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Anket Ana Sayfa</button></a>
+			<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Survey Home</button></a>
 			<div class="row h-100 align-items-center">
-				<span class="m-auto">Ankete Soru eklenmedi!</span>
+				<span class="m-auto">Survey doesn't have any question!</span>
 			</div>
 		</div>
 	@else
 		@foreach($survey->questions as $question)
 		<div class="question col-sm-11 h-100" id="question-{{$question->question_number}}">
-		  	<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Anket Ana Sayfa</button></a>
+		  	<a href="{{ route('welcome') }}"><button type="button" class="btn mb-5 mt-5 btn-xl btn-outline-secondary float-right">Survey Home</button></a>
 			@switch($question->question_type_id)
 			    @case(1)
 						
@@ -33,12 +33,12 @@
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>
@@ -63,12 +63,12 @@
 								    </div>
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5">Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5">Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5">Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5">Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>
@@ -93,7 +93,7 @@
 									    @endforeach
 									
 										<label class="control control-radio">
-									    	Diğer
+									    	Other
 									  		<input type="radio" name="questionID-{{ $question->id }}" id="othercheck-{{ $question->id }}" value="0" onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus(); $('#other-{{ $question->id }}').attr('required'); }else{ $('#other-{{ $question->id }}').removeAttr('required'); }">
 									  		<div class="control_indicator"></div>
 									    </label>
@@ -104,12 +104,12 @@
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>
@@ -134,7 +134,7 @@
 								        @endforeach
 										
 									    <label class="control control-checkbox">
-									  		Diğer
+									  		Other
 									  		<input type="checkbox" id="othercheck-{{ $question->id }}" name="questionID-{{ $question->id }}[]" value="0" onclick="if(this.checked){ document.getElementById('other-{{ $question->id }}').focus();  $('#other-{{ $question->id }}').attr('required'); }else{ document.getElementById('other-{{ $question->id }}').value=''; $('#other-{{ $question->id }}').removeAttr('required'); }">
 									  		<div class="control_indicator"></div>
 									  	</label> 
@@ -143,12 +143,12 @@
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5">Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5">Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5">Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5">Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>
@@ -196,12 +196,12 @@
 
 									<div class="btn-group btn-block" role="group" aria-label="Group">
 										@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>
@@ -222,12 +222,12 @@
 
 								    <div class="btn-group btn-block" role="group" aria-label="Group">
 								    	@if(!$loop->first)	
-											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Geri</a>
+											<a href="#" role="button" class="previous btn btn-outline-success mt-5" ><i class="fas fa-caret-left fa-lg"></i> Back</a>
 										@endif
 										@if($loop->last)
-											<button type="submit" class="btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></button>
+											<button type="submit" class="btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></button>
 										@else
-											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Devam <i class="fas fa-caret-right fa-lg"></i></a>
+											<a href="#" role="button" class="next btn btn-outline-success mt-5" >Next <i class="fas fa-caret-right fa-lg"></i></a>
 										@endif
 									</div>
 								</div>

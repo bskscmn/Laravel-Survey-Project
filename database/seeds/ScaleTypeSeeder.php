@@ -13,15 +13,15 @@ class ScaleTypeSeeder extends Seeder
     public function run()
     {
         $scaleType = new ScaleType();
-        $scaleType->type = 'Katılıyorum | Katılmıyorum';
+        $scaleType->type = 'Agree | Disagree';
         $scaleType->save();
 
         $scaleType = new ScaleType();
-        $scaleType->type = 'Katılıyorum | Kararsızım | Katılmıyorum';
+        $scaleType->type = 'Agree | Undecided | Disagree';
         $scaleType->save();
 
         $scaleType = new ScaleType();
-        $scaleType->type = 'Kesinlikle Katılıyorum | Katılıyorum | Kararsızım | Katılmıyorum | Kesinlikle Katılmıyorum';
+        $scaleType->type = 'Strongly Agree | Agree | Undecided | Disagree | Strongly Disagree';
         $scaleType->save();
 
         $scaleType = new ScaleType();

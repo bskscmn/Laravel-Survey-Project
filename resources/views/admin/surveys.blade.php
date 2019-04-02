@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Anketler</h1>
+      <h1>Surveys</h1>
     </section>
 
     <!-- Main content -->
@@ -16,7 +16,7 @@
               <div class="card-header">
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
-                      <button  class="btn btn-success" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-user-plus"></i> Ekle</button>
+                      <button class="btn btn-success" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-user-plus"></i> Add New</button>
                   </div>
                 </div>
               </div>
@@ -26,7 +26,7 @@
                   <tbody>
                     <tr>
                       <th>ID</th>
-                      <th>Ad</th>
+                      <th>Name</th>
                       <th></th>
                     </tr>
                     @foreach($surveys as $survey)
@@ -59,7 +59,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewModalLabel">Anket Ekle</h5>
+                <h5 class="modal-title" id="addNewModalLabel">New Survey</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -88,7 +88,7 @@
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-4">
                                       <button type="submit" class="btn btn-primary">
-                                          {{ __('Kaydet') }}
+                                          {{ __('Save') }}
                                       </button>
                                   </div>
                               </div>
@@ -107,7 +107,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="edit-modal-label">Anket Düzenle</h5>
+                <h5 class="modal-title" id="edit-modal-label">Survey Edit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -121,7 +121,7 @@
                               <input type="hidden" id="modal-input-id" name="id" value="">
 
                               <div class="form-group row">
-                                  <label for="modal-input-name" class="col-md-2 col-form-label text-md-right">{{ __('Anket') }}</label>
+                                  <label for="modal-input-name" class="col-md-2 col-form-label text-md-right">{{ __('Survey') }}</label>
 
                                   <div class="col-md-8">
                                       <input id="modal-input-name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -137,7 +137,7 @@
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-4">
                                       <button type="submit" class="btn btn-primary">
-                                          {{ __('Kaydet') }}
+                                          {{ __('Save') }}
                                       </button>
                                   </div>
                               </div>
@@ -179,7 +179,7 @@ $(document).ready(function() {
  
 })
   function myFunction() {
-      if(!confirm("Silmek istediğinize emin misiniz?"))
+      if(!confirm("Are you sure?"))
       event.preventDefault();
   }
 </script>

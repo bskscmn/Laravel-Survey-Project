@@ -21,7 +21,7 @@ class CreateScaleQuestionsTable extends Migration
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('question_number')->default('1');
-            $table->string('soru');
+            $table->string('question');
             $table->timestamps();
         });
     }

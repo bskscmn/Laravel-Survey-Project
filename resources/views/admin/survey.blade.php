@@ -17,8 +17,8 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
                     <div class="col-lg-12">
-                      <h3 class="float-left">Anket Soruları</h3>
-                      <button  class="btn btn-success float-right" data-toggle="modal" data-target="#addNewQuestion"><i class="fas fa-question-circle"></i> Soru Ekle</button>
+                      <h3 class="float-left">Survey Questions</h3>
+                      <button  class="btn btn-success float-right" data-toggle="modal" data-target="#addNewQuestion"><i class="fas fa-question-circle"></i> Add Question</button>
                     </div>
                   </div>
                 </div>
@@ -28,23 +28,23 @@
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <th>No</th>
-                      <th width="50%">Soru</th>
-                      <th>Soru Tipi</th>
+                      <th>#</th>
+                      <th width="50%">Question</th>
+                      <th>Question Type</th>
                       <th></th>
                     </tr>
                     @foreach($survey->questions as $question)
                       <tr class="data-row baseQuestionLine">
                         <td class="thisnumber">{{ $question->question_number }}</td>
-                        <td class="thissoru">{{ $question->soru }} </td>
+                        <td class="thisquestion">{{ $question->question }} </td>
                         <td class="thistype">{{ $question->questionType->type }}</td>    
                         <td>
                           <div class="btn-group float-right" role="group" aria-label="Buttons group">
                             
                             @if($question->questionType->id == 1 || $question->questionType->id == 2 || $question->questionType->id == 3 || $question->questionType->id == 4)
-                              <button  class="btn btn-success btn-sm" data-toggle="modal" data-target="#addNewChoice" onclick="return setQuestionId({{ $question->id}});">Seçenek Ekle</button>
+                              <button  class="btn btn-success btn-sm" data-toggle="modal" data-target="#addNewChoice" onclick="return setQuestionId({{ $question->id}});">Add Choice</button>
                             @elseif($question->questionType->id == 5 )
-                              <button  class="btn btn-success btn-sm" data-toggle="modal" data-target="#createScale" onclick="return setQuestionIdScale({{ $question->id}});">Soru Ekle </button>
+                              <button  class="btn btn-success btn-sm" data-toggle="modal" data-target="#createScale" onclick="return setQuestionIdScale({{ $question->id}});">Add Question </button>
                             @endif
 
                             <button id="{{ $question->id }}"  data-qtype_id="{{ $question->questionType->id }}" class="btn btn-info btn-sm edit-item" data-toggle="modal" data-target="#edit-modal-question"><i class="fa fa-edit"></i>edit</button>
@@ -72,7 +72,7 @@
                           @foreach($question->scaleQuestions as $scaleQuestion)
                             <tr class="data-row table-sm trScaleQ" >
                               <td></td>
-                              <td class="thischoice table-secondary" colspan="2">{{ $scaleQuestion->soru }}</td>
+                              <td class="thischoice table-secondary" colspan="2">{{ $scaleQuestion->question }}</td>
                               <td class="table-secondary">
                                 <div class="btn-group float-right" role="group" aria-label="Buttons group">
 
@@ -114,7 +114,7 @@
                           @if($question->questionType->id == 3 || $question->questionType->id == 4)
                             <tr class="table-sm baseQuestionLine">
                               <td></td>
-                              <td class="thischoice table-secondary" colspan="2">Diğer</td>
+                              <td class="thischoice table-secondary" colspan="2">Other</td>
                               <td class="table-secondary">
                               </td> 
                             </tr>
@@ -137,10 +137,10 @@
       
       <!-- Modal Add New Question-->
         <div class="modal fade" id="addNewQuestion" tabindex="-1" role="dialog" aria-labelledby="addNewQuestionLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewQuestionLabel">Soru Ekle</h5>
+                <h5 class="modal-title" id="addNewQuestionLabel">Add Question</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -152,7 +152,7 @@
                         <form method="POST" action="{{ route('admin.questionstore', $survey->id ) }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('No') }}</label>
+                                <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('#') }}</label>
 
                                 <div class="col-md-2">
                                     <input id="questionNumber" type="text" class="form-control{{ $errors->has('questionNumber') ? ' is-invalid' : '' }}" name="questionNumber" value="{{ old('questionNumber') }}" required autofocus>
@@ -166,24 +166,24 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="soru" class="col-md-2 col-form-label text-md-right">{{ __('Soru') }}</label>
+                                <label for="question" class="col-md-2 col-form-label text-md-right">{{ __('Question') }}</label>
 
                                 <div class="col-md-10">
-                                    <input id="soru" type="text" class="form-control{{ $errors->has('soru') ? ' is-invalid' : '' }}" name="soru" value="{{ old('soru') }}" required autofocus>
+                                    <input id="question" type="text" class="form-control{{ $errors->has('question') ? ' is-invalid' : '' }}" name="question" value="{{ old('question') }}" required autofocus>
 
-                                    @if ($errors->has('soru'))
+                                    @if ($errors->has('question'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('soru') }}</strong>
+                                            <strong>{{ $errors->first('question') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="questionType" class="col-md-2 col-form-label text-md-right">{{ __('Soru tipi') }}</label>
+                                <label for="questionType" class="col-md-2 col-form-label text-md-right">{{ __('question type') }}</label>
 
                                 <div class="col-md-10">
                                   <select id="questionType" name="questionType" class="form-control{{ $errors->has('questionType') ? ' is-invalid' : '' }}" required>
-                                    <option value="" selected disabled>--Seçiniz--</option>
+                                    <option value="" selected disabled>--Select--</option>
                                     @foreach($questionTypes as $questionType)
                                       <option value="{{ $questionType->id }}">{{ $questionType->type }}</option>
                                     @endforeach
@@ -198,7 +198,7 @@
                             </div>
 
                             <div id="scaleSelectbox" class="form-group row">
-                                {{ __('Derecelendirme ölçütü') }}
+                                {{ __('Scale') }}
                                 <div class="col-md-12">
                                     @foreach($scaleTypes as $scaleType)
                                       <div class="radio">
@@ -215,7 +215,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Kaydet') }}
+                                        {{ __('Save') }}
                                     </button>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="edit-modal-question-label">Soru Düzenle</h5>
+                <h5 class="modal-title" id="edit-modal-question-label">Question Düzenle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -259,25 +259,25 @@
                               </div>
 
                                <div class="form-group row">
-                                  <label for="modal-input-soru" class="col-md-2 col-form-label text-md-right">{{ __('Soru') }}</label>
+                                  <label for="modal-input-question" class="col-md-2 col-form-label text-md-right">{{ __('Question') }}</label>
 
                                   <div class="col-md-10">
-                                      <input id="modal-input-soru" type="text" class="form-control{{ $errors->has('soru') ? ' is-invalid' : '' }}" name="soru" value="{{ old('soru') }}" required autofocus>
+                                      <input id="modal-input-question" type="text" class="form-control{{ $errors->has('question') ? ' is-invalid' : '' }}" name="question" value="{{ old('question') }}" required autofocus>
 
-                                      @if ($errors->has('soru'))
+                                      @if ($errors->has('question'))
                                           <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $errors->first('soru') }}</strong>
+                                              <strong>{{ $errors->first('question') }}</strong>
                                           </span>
                                       @endif
                                   </div>
                               </div>
 
                               <div class="form-group row">
-                                  <label for="modal-input-type" class="col-md-2 col-form-label text-md-right">{{ __('Soru tipi') }}</label>
+                                  <label for="modal-input-type" class="col-md-2 col-form-label text-md-right">{{ __('Question Type') }}</label>
 
                                   <div class="col-md-10">
                                     <select id="modal-input-type" name="question_type_id" class="form-control{{ $errors->has('question_type_id') ? ' is-invalid' : '' }}" required>
-                                      <option value="" disabled>--Seçiniz--</option>
+                                      <option value="" disabled>--Select--</option>
                                       @foreach($questionTypes as $type)
                                         <option value="{{ $type->id }}">{{ $type->type }}</option>
                                       @endforeach
@@ -292,11 +292,11 @@
                               </div>  
 
                               <div class="form-group row" id="scaleSelectboxedit">
-                                  <label for="modal-input-scaleType" class="col-md-2 col-form-label text-md-right">{{ __('Derece') }}</label>
+                                  <label for="modal-input-scaleType" class="col-md-2 col-form-label text-md-right">{{ __('Scale') }}</label>
 
                                   <div class="col-md-10">
                                     <select id="modal-input-scaleType" name="scale_type" class="form-control{{ $errors->has('scale_type') ? ' is-invalid' : '' }}" >
-                                      <option value="" disabled>--Seçiniz--</option>
+                                      <option value="" disabled>--Select--</option>
                                       @foreach($scaleTypes as $scaleType)
                                         <option value="{{ $scaleType->id }}">{{ $scaleType->type }}</option>
                                       @endforeach
@@ -313,7 +313,7 @@
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-4">
                                       <button type="submit" class="btn btn-primary">
-                                          {{ __('Kaydet') }}
+                                          {{ __('Save') }}
                                       </button>
                                   </div>
                               </div>
@@ -332,7 +332,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewChoiceLabel">Seçenek Ekle</h5>
+                <h5 class="modal-title" id="addNewChoiceLabel">Add Choice</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -349,7 +349,7 @@
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <input id="choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" placeholder="Seçenek" required autofocus>
+                                    <input id="choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" placeholder=" Choice" required autofocus>
 
                                     @if ($errors->has('choice'))
                                         <span class="invalid-feedback" role="alert">
@@ -379,7 +379,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="edit-modal-choice-label">Seçenek Düzenle</h5>
+                <h5 class="modal-title" id="edit-modal-choice-label">Edit Choice</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -394,7 +394,7 @@
 
                                <div class="form-group row">
                                   <div class="col-md-12">
-                                      <input id="modal-input-choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" placeholder="Seçenek" required autofocus>
+                                      <input id="modal-input-choice" type="text" class="form-control{{ $errors->has('choice') ? ' is-invalid' : '' }}" name="choice" value="{{ old('choice') }}" placeholder="Choice" required autofocus>
 
                                       @if ($errors->has('choice'))
                                         <span class="invalid-feedback" role="alert">
@@ -407,7 +407,7 @@
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-4">
                                       <button type="submit" class="btn btn-primary">
-                                          {{ __('Kaydet') }}
+                                          {{ __('Save') }}
                                       </button>
                                   </div>
                               </div>
@@ -426,7 +426,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="createScaleLabel">Soru Ekle</h5>
+                <h5 class="modal-title" id="createScaleLabel">Add Question</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -439,7 +439,7 @@
                             @csrf
                             <input type="hidden" id="modal-input-questionid-scale" name="question_id" value="">
                             <div class="form-group row">
-                                <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('No') }}</label>
+                                <label for="questionNumber" class="col-md-2 col-form-label text-md-right">{{ __('#') }}</label>
 
                                 <div class="col-md-2">
                                     <input id="questionNumber" type="text" class="form-control{{ $errors->has('questionNumber') ? ' is-invalid' : '' }}" name="questionNumber" value="{{ old('questionNumber') }}" required autofocus>
@@ -453,14 +453,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="soru" class="col-md-2 col-form-label text-md-right">{{ __('Soru') }}</label>
+                                <label for="question" class="col-md-2 col-form-label text-md-right">{{ __('Question') }}</label>
 
                                 <div class="col-md-10">
-                                    <input id="soru" type="text" class="form-control{{ $errors->has('soru') ? ' is-invalid' : '' }}" name="soru" value="{{ old('soru') }}" required autofocus>
+                                    <input id="question" type="text" class="form-control{{ $errors->has('question') ? ' is-invalid' : '' }}" name="question" value="{{ old('question') }}" required autofocus>
 
-                                    @if ($errors->has('soru'))
+                                    @if ($errors->has('question'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('soru') }}</strong>
+                                            <strong>{{ $errors->first('question') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -469,7 +469,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Kaydet') }}
+                                        {{ __('Save') }}
                                     </button>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@ $(document).ready(function() {
     var id = this.id; 
     var row = $(this).closest(".data-row");
     var number = row.children(".thisnumber").text();
-    var soru = row.children(".thissoru").text();
+    var question = row.children(".thisquestion").text();
     var thistype = row.children(".thistype").text().trim();
     var thisScaleType = $('#scale-'+id).text().trim();
     var questionTypeId = $(this).data('qtype_id'); 
@@ -534,7 +534,7 @@ $(document).ready(function() {
 
     $("#modal-input-id").val(id);
     $("#modal-input-questionNumber").val(number);
-    $("#modal-input-soru").val(soru);
+    $("#modal-input-question").val(question);
 
     for (var i = 0; i < $("#modal-input-type option").length; i++) {
           
@@ -639,7 +639,7 @@ $(document).ready(function() {
 
   //Delete confirm alert
   function myFunction() {
-      if(!confirm("Silmek istediğinize emin misiniz?"))
+      if(!confirm("Are you sure?"))
       event.preventDefault();
   }
 

@@ -32,24 +32,13 @@ class UserController extends Controller
 
     protected function store(Request $request)
     {
-
-        $messages = [
-            'name.required' => 'İsim alanı zorunludur.',
-            'username.required' => 'Kullanıcı adı alanı zorunludur',
-            'username.unique' => 'Kullanıcı adı zaten var.',
-            'email.required' => 'Geçerli bir e-posta giriniz.',
-            'email.unique' => 'E-posta zaten var.',
-            'role.required' => 'Yetki seçiniz.',
-            'password.required' => 'Şifre giriniz.',
-            'password.min' => 'Şifre minimum 6 karakter olmalıdır.'
-        ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'role' => 'required',
             'password' => 'required|string|min:6',
-        ], $messages);
+        ]);
     
         $user = User::create([
             'name' => $request['name'],
@@ -69,22 +58,13 @@ class UserController extends Controller
     {
     	$user = User::findOrFail($request['id']);
 
-        $messages = [
-            'name.required' => 'İsim alanı zorunludur.',
-            'username.required' => 'Kullanıcı adı alanı zorunludur',
-            'username.unique' => 'Kullanıcı adı zaten var.',
-            'email.required' => 'Geçerli bir e-posta giriniz.',
-            'email.unique' => 'E-posta zaten var.',
-            'password.min' => 'Şifre minimum 6 karakter olmalıdır.',
-            'role.required' => 'Yetki seçiniz.'
-        ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,'.$user->id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|sometimes|string|min:6',
             'role' => 'required',
-        ], $messages);
+        ]);
 
 		if($request['password']) { 
             $request['password'] =  Hash::make($request['password']); 
@@ -106,20 +86,12 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $messages = [
-            'name.required' => 'İsim alanı zorunludur.',
-            'username.required' => 'Kullanıcı adı alanı zorunludur',
-            'username.unique' => 'Kullanıcı adı zaten var.',
-            'email.required' => 'Geçerli bir e-posta giriniz.',
-            'email.unique' => 'E-posta zaten var.',
-            'password.min' => 'Şifre minimum 6 karakter olmalıdır.'
-        ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,'.$user->id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|sometimes|string|min:6',
-        ], $messages);
+        ]);
 
         if($request['password']) { 
             $request['password'] =  Hash::make($request['password']); 

@@ -18,16 +18,11 @@ class QuestionController extends Controller
      */
     public function store(Request $request, $surveyid)
     {
-        $messages = [
-            'questionNumber.required' => 'Soru no alanı zorunludur.',
-            'soru.required' => 'Soru alanı zorunludur.',
-            'questionType.required' => 'Soru tipi seçiniz.',
-        ];
         $this->validate($request,[
             'questionNumber' => 'required|integer',
             'soru' => 'required|string|max:255',
             'questionType' => 'required|integer',
-        ], $messages);
+        ]);
 
         if($request['questionType']==5 && $request['scaleType']==null){
             return redirect()->to('/surveys/show/'.$surveyid)->with('error','Derecelendirme ölçütü seçiniz!');
@@ -47,9 +42,6 @@ class QuestionController extends Controller
             return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
         }
 
-        
-
-        
     }
 
     /**
@@ -62,17 +54,12 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($request['id']);
 
-        $messages = [
-            'question_number.required' => 'Soru no alanı zorunludur.',
-            'soru.required' => 'Soru alanı zorunludur.',
-            'question_type_id.required' => 'Soru tipi seçiniz.',
-        ];
         $this->validate($request,[
             'question_number' => 'required|integer',
             'soru' => 'required|string|max:255',
-            'question_type_id' => 'required|integer',
+            'question_type_id' => 'sometimes|integer',
             'scale_type' => 'sometimes|required|integer',
-        ], $messages);
+        ]);
 
         $question->update($request->all());
         

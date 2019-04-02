@@ -17,7 +17,7 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
                     <div class="col-lg-12">
-                      <h3 class="float-left">Anket Sonuçları</h3>
+                      <h3 class="float-left">Survey Results</h3>
                     </div>
                   </div>
                 </div>
@@ -27,18 +27,18 @@
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <th>No</th>
-                      <th width="50%">Soru</th>
-                      <th>Toplam Değer</th>
+                      <th>#</th>
+                      <th width="50%">Question</th>
+                      <th>Total</th>
                     </tr>
                     @foreach($survey->questions as $question)
                       <tr class="data-row">
                         <td>{{ $question->question_number }}</td>
                         <td>
                           @if($question->questionType->id == 6)
-                            <a href="{{ route('analytics.opens', [$survey->id, $question->id]) }}">{{ $question->soru }}</a>
+                            <a href="{{ route('analytics.opens', [$survey->id, $question->id]) }}">{{ $question->question }}</a>
                           @else 
-                            {{ $question->soru }} 
+                            {{ $question->question }}
                           @endif
                         </td>
                         <td></td>                      
@@ -62,7 +62,7 @@
                              
                             <tr class="data-row table-sm">
                               <td></td>
-                              <td class="table-secondary">{{ $scaleQuestion->soru }}</td>
+                              <td class="table-secondary">{{ $scaleQuestion->question }}</td>
                               <td class="table-secondary row" style="margin-right:0px !important">
                                   @foreach($e as  $key => $val)
                                    <div class="col">{{  $scaleQuestion->scaleAnswers->where("scale_question_id", $scaleQuestion->id)->where("answer", $key+1)->count() }}</div>

@@ -13,27 +13,27 @@ class QuestionTypeSeeder extends Seeder
     public function run()
     {
         $questionType = new QuestionType();
-        $questionType->type = 'Tek seçenek';
+        $questionType->type = 'Only selection(Radio Button)';
         $questionType->save();
 
         $questionType = new QuestionType();
-        $questionType->type = 'Birden çok seçenek';
+        $questionType->type = 'Multiple selection(Checkbox)';
         $questionType->save();
 
         $questionType = new QuestionType();
-        $questionType->type = 'Tek seçenek + Diğer alanı';
+        $questionType->type = 'Only selection with other input';
         $questionType->save();
 
         $questionType = new QuestionType();
-        $questionType->type = 'Birden çok seçenek + Diğer alanı';
+        $questionType->type = 'Multiple selection with other input';
         $questionType->save();
 
         $questionType = new QuestionType();
-        $questionType->type = 'Dereceleme';
+        $questionType->type = 'Scale';
         $questionType->save();
 
         $questionType = new QuestionType();
-        $questionType->type = 'Açık uçlu';
+        $questionType->type = 'Open question';
         $questionType->save();
     }
 }

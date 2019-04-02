@@ -19,12 +19,10 @@ class ChoiceController extends Controller
      */
     public function store(Request $request, $surveyid)
     {
-        $messages = [
-            'choice.required' => 'Seçenek alanı zorunludur.',
-        ];
+
         $this->validate($request,[
             'choice' => 'required|string|max:255',
-        ], $messages);
+        ]);
 
         $choice = Choice::create([
             'question_id' => $request['question_id'],
@@ -43,14 +41,10 @@ class ChoiceController extends Controller
      */
     public function storeScaleQuestion(Request $request, $surveyid)
     {
-        $messages = [
-            'questionNumber.required' => 'Soru no alanı zorunludur.',
-            'soru.required' => 'Soru alanı zorunludur.',
-        ];
         $this->validate($request,[
             'questionNumber' => 'required|integer',
             'soru' => 'required|string|max:255',
-        ], $messages);
+        ]);
 
         $scaleQuestion = ScaleQuestion::create([
             'survey_id' => $surveyid,
@@ -74,12 +68,9 @@ class ChoiceController extends Controller
     {
         $choice = Choice::findOrFail($request['id']);
 
-        $messages = [
-            'choice.required' => 'Seçenek alanı zorunludur.',
-        ];
         $this->validate($request,[
             'choice' => 'required|string|max:255',
-        ], $messages);
+        ]);
 
         $choice->update($request->all());
         

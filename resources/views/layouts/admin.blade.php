@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Yargıtay Anket </title>
+  <title>Survey Project</title>
 
   <link rel="stylesheet" type="text/css" href="/css/app.css">
 
@@ -35,9 +35,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Anket</b></span>
+      <span class="logo-mini"><b>Survey</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Ön Büro </b>Anket</span>
+      <span class="logo-lg"><b>Survey Project</span>
     </a>
 
     <!-- Header Navbar -->
@@ -88,14 +88,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </li>
         @if(Auth::user()->hasRole('Admin')) 
           <li class="header">ADMIN MENU</li>
-          <li><a href="{{ route('admin.users') }}"><i class="nav-icon fas fa-users"></i> <span>Kullanıcılar</span></a></li>
-
-          <li class="header">ANKET MENU</li>
-          <li><a href="{{ route('admin.surveys') }}"><i class="nav-icon fas fa-poll"></i> <span>Anketler</span></a></li>
+          <li><a href="{{ route('admin.users') }}"><i class="nav-icon fas fa-users"></i> <span>Users</span></a></li>
+          <li><a href="{{ route('admin.surveys') }}"><i class="nav-icon fas fa-poll"></i> <span>Surveys</span></a></li>
         @endif
         @if(Auth::user()->hasRole('Analytics')) 
           <li class="header">ANALYTICS MENU</li>
-          <li><a href="{{ route('analytics.surveylist') }}"><i class="nav-icon fas fa-poll"></i> <span>Anketler</span></a></li>
+          <li><a href="{{ route('analytics.surveylist') }}"><i class="nav-icon fas fa-poll"></i> <span>Surveys</span></a></li>
         @endif
       </ul>
       <!-- /.sidebar-menu -->
@@ -128,10 +126,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Yargıtay Ön Büro Anketi
+      Survey
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 Yargıtay Web & Tasarım.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 Basak Secmen.</strong> All rights reserved.
   </footer>
 
 </div>

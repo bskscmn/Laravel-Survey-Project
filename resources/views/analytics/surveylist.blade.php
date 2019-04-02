@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Anketler</h1>
+      <h1>Surveys</h1>
     </section>
 
     <!-- Main content -->
@@ -19,7 +19,7 @@
                   <tbody>
                     <tr>
                       <th>ID</th>
-                      <th>Ad</th>
+                      <th>Name</th>
                       <th></th>
                     </tr>
                     @foreach($surveys as $survey)

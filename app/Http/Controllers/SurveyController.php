@@ -29,12 +29,9 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'name.required' => 'Anket alanı zorunludur.',
-        ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
-        ], $messages);
+        ]);
     
         $survey = Survey::create([
             'name' => $request['name'],
@@ -68,12 +65,9 @@ class SurveyController extends Controller
     {
         $survey = Survey::findOrFail($request['id']);
 
-        $messages = [
-            'name.required' => 'Anket alanı zorunludur.',
-        ];
         $this->validate($request,[
             'name' => 'required|string|max:255',
-        ], $messages);
+        ]);
 
         $survey->update($request->all());
        

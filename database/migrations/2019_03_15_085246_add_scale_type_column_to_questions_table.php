@@ -14,7 +14,7 @@ class AddScaleTypeColumnToQuestionsTable extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->integer('scale_type')->after('soru')->nullable()->unsigned();
+            $table->integer('scale_type')->after('question')->nullable()->unsigned();
             $table->foreign('scale_type')->references('id')->on('scale_types');
         });
     }

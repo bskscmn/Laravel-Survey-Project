@@ -6,7 +6,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Yargıtay Anket </title>
+  <title>Survey Project </title>
 
   <link rel="stylesheet" type="text/css" href="/css/app.css">
   <link rel="stylesheet" type="text/css" href="/css/front.css">
@@ -37,7 +37,7 @@
              <div class="col-sm-12 my-auto">
 
                 <img src="/images/survey.png" width="50%" alt="" class="img-fluid">
-                <h2>Yargıtay Başkanlığı<br>Ön Büro Memnuniyet Anketi</h2>
+                <h2>Survey Project<br>Başak Seçmen</h2>
                 <p>Tation argumentum et usu, dicit viderer evertitur te has.<br> Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel. <br>Adhuc invidunt duo ex. Eu tantas dolorum ullamcorper qui.</p>
              </div>
              
@@ -51,7 +51,7 @@
         </div>
         </div>
     </div>
-    <div class="fixed-bottom footer row"><span class="mx-auto d-block">© 2019 Yargıtay Başkanlığı | Web Tasarım</span></div>
+    <div class="fixed-bottom footer row"><span class="mx-auto d-block">© 2019 Başak Seçmen | Full Stack Developer | <a href="www.basaksecmen.com">www.basaksecmen.com</a></span></div>
       </div>
 
 </div>

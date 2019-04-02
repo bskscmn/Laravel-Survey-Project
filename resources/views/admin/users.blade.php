@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Kullanıcılar</h1>
+      <h1>Users</h1>
     </section>
 
     <!-- Main content -->
@@ -16,7 +16,7 @@
               <div class="card-header">
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
-                      <button  class="btn btn-success" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-user-plus"></i> Ekle</button>
+                      <button  class="btn btn-success" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-user-plus"></i> Add New</button>
                   </div>
                 </div>
               </div>
@@ -26,11 +26,11 @@
                   <tbody>
                     <tr>
                       <th>ID</th>
-                      <th>Ad</th>
-                      <th>Kullanıcı adı</th>
+                      <th>Name</th>
+                      <th>User Name</th>
                       <th>E-mail</th>
-                      <th>Rol</th>
-                      <th>Aktif</th>
+                      <th>Role</th>
+                      <th>Aktivation</th>
                       <th></th>
                     </tr>
                     @foreach($users as $user)
@@ -66,7 +66,7 @@
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewModalLabel">Kullanıcı Ekle</h5>
+                <h5 class="modal-title" id="addNewModalLabel">Add User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,7 +79,7 @@
                               @csrf
 
                               <div class="form-group row">
-                                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ad') }}</label>
+                                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                   <div class="col-md-6">
                                       <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -121,11 +121,11 @@
                               </div>
 
                               <div class="form-group row">
-                                  <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Yetki') }}</label>
+                                  <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                                   <div class="col-md-6">
                                     <select id="role" name="role[]" class="selectpicker form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" multiple required>
-                                      <option value="" selected disabled>-- Çoklu Seçim için Ctrl+ --</option>
+                                      <option value="" selected disabled>-- for multiple selection Ctrl+ --</option>
                                       @foreach($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                       @endforeach
@@ -240,11 +240,11 @@
                               </div>
 
                               <div class="form-group row">
-                                  <label for="modal-input-role" class="col-md-4 col-form-label text-md-right">{{ __('Yetki') }}</label>
+                                  <label for="modal-input-role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                                   <div class="col-md-6">
                                     <select id="modal-input-role" name="role[]" class="selectpicker form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" multiple required>
-                                      <option value="" disabled>-- Çoklu Seçim için Ctrl+ --</option>
+                                      <option value="" disabled>-- For multiple selection: Ctrl+ --</option>
                                       @foreach($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                                       @endforeach
@@ -259,7 +259,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  <label for="modal-input-active" class="col-md-4 col-form-label text-md-right">{{ __('Aktif') }}</label>
+                                  <label for="modal-input-active" class="col-md-4 col-form-label text-md-right">{{ __('Aktivation') }}</label>
 
                                   <div class="col-md-6">
                                       <input id="modal-input-active" type="text" class="form-control{{ $errors->has('active') ? ' is-invalid' : '' }}" name="active" value="{{ old('active') }}" required autofocus>
@@ -361,7 +361,7 @@ $(document).ready(function() {
  
 })
   function myFunction() {
-      if(!confirm("Silmek istediğinize emin misiniz?"))
+      if(!confirm("Are you sure?"))
       event.preventDefault();
   }
 </script>

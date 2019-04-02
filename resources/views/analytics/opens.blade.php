@@ -17,8 +17,8 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
                     <div class="col-lg-12">
-                      <h3 class="float-left">Anket Sonuçları</h3>
-                      <a href="{{ route('analytics.analytics', $survey->id) }}" class="btn btn-outline-secondary float-right"><i class="fas fa-angle-left"></i> Geri</a>
+                      <h3 class="float-left">Survey Results</h3>
+                      <a href="{{ route('analytics.analytics', $survey->id) }}" class="btn btn-outline-secondary float-right"><i class="fas fa-angle-left"></i> Back</a>
                     </div>
                   </div>
                 </div>
@@ -28,7 +28,7 @@
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <th>{{ @$answers[0]->question->soru }}</th>
+                      <th>{{ @$answers[0]->question->question }}</th>
                     </tr>
                     @foreach($answers as $answer)
                       <tr class="data-row">

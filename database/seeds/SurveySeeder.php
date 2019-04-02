@@ -13,7 +13,7 @@ class SurveySeeder extends Seeder
     public function run()
     {
         $survey = new Survey();
-        $survey->name = 'Ön Büro Memnuniyet Anketi';
+        $survey->name = 'Satisfaction Survey';
         $survey->save();
     }
 }
