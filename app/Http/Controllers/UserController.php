@@ -52,7 +52,7 @@ class UserController extends Controller
         
         $users = User::all();
         $roles = Role::all();
-	    return view('welcome', ['users' => $users, 'roles' => $roles]);
+	    return view('admin.users', ['users' => $users, 'roles' => $roles]);
     }
     public function update(Request $request)
     {

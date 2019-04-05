@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
 		//Users
 		Route::get('/users',['as'=>'admin.users','uses'=>'UserController@index']);
 		Route::post('/newuser',['as'=>'admin.newuser','uses'=>'UserController@store']);
+        Route::get('/edituser',['as'=>'admin.users','uses'=>'UserController@index']);
 		Route::post('/edituser',['as'=>'admin.edituser','uses'=>'UserController@update']);
 		Route::delete('user/delete/{id}', ['as' => 'admin.userdestroy', 'uses' => 'UserController@destroy']);
 

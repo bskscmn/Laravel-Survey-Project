@@ -118,6 +118,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     @endif
 
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
