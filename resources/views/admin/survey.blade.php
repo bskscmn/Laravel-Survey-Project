@@ -71,8 +71,8 @@
                           </tr>
                           @foreach($question->scaleQuestions as $scaleQuestion)
                             <tr class="data-row table-sm trScaleQ" >
-                              <td></td>
-                              <td class="thischoice table-secondary" colspan="2">{{ $scaleQuestion->question }}</td>
+                              <td class="thisScaleQuestion_number text-right">{{ $scaleQuestion->question_number }}</td>
+                              <td class="thisScaleQuestion table-secondary" colspan="2">{{ $scaleQuestion->question }}</td>
                               <td class="table-secondary">
                                 <div class="btn-group float-right" role="group" aria-label="Buttons group">
 
@@ -85,7 +85,7 @@
                                     </form>
                                   </a>
                                 </div>
-                              </td> 
+                              </td>
                             </tr>
                           @endforeach
   
@@ -480,8 +480,69 @@
                 
             </div>
           </div>
-        </div>  
+        </div>
+      <!-- Modal Edit scaleQuestion-->
+      <div class="modal fade" id="edit-modal-scaleQuestion" tabindex="-1" role="dialog" aria-labelledby="edit-modal-scaleQuestion-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edit-modal-scaleQuestion-label">Edit Question</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="attachment-body-content">
+              <div class="card">
 
+                <div class="card-body">
+                  <form id="edit-form-scaleQuestion" method="POST" action="{{ route('admin.scalesquestionedit', $survey->id) }}">
+                    @csrf
+                    <input type="hidden" id="modal-input-scaleQuestionid" name="id" value="">
+
+                    <div class="form-group row">
+                      <label for="modal-input-scaleQuestionNumber" class="col-md-2 col-form-label text-md-right">{{ __('No') }}</label>
+
+                      <div class="col-md-2">
+                        <input id="modal-input-scaleQuestionNumber" type="text" class="form-control{{ $errors->has('question_number') ? ' is-invalid' : '' }}" name="question_number" value="{{ old('question_number') }}" required autofocus>
+
+                        @if ($errors->has('question_number'))
+                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('question_number') }}</strong>
+                                          </span>
+                        @endif
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="modal-input-scaleQuestion" class="col-md-2 col-form-label text-md-right">{{ __('Question') }}</label>
+
+                      <div class="col-md-10">
+                        <input id="modal-input-scaleQuestion" type="text" class="form-control{{ $errors->has('question') ? ' is-invalid' : '' }}" name="question" value="{{ old('question') }}" required autofocus>
+
+                        @if ($errors->has('soru'))
+                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('soru') }}</strong>
+                                          </span>
+                        @endif
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                      <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                          {{ __('Save') }}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
 </div>
@@ -609,9 +670,12 @@ $(document).ready(function() {
       $('#modal-input-type').prop('disabled', false);
 
     }
-    
-  });
 
+    $('#edit-form-question').on('submit', function() {
+        $('#modal-input-type').prop('disabled', false);
+    });
+
+  });
 
   // on modal edit choice
   $(document).on('click', ".edit-choice", function() {
@@ -625,6 +689,20 @@ $(document).ready(function() {
     
   });
 
+  // on modal edit scale question
+  $(document).on('click', ".edit-scaleQuestion", function() {
+
+      var id = this.id;
+      var row = $(this).closest(".data-row");
+      var scaleQuestionNumber = row.children(".thisScaleQuestion_number").text();
+      var scaleQuestion = row.children(".thisScaleQuestion").text();
+
+      $("#modal-input-scaleQuestionid").val(id);
+      $("#modal-input-scaleQuestionNumber").val(scaleQuestionNumber);
+      $("#modal-input-scaleQuestion").val(scaleQuestion);
+
+  });
+
   // reset form on edit-modal-question hide 
   $('#edit-modal-question').on('hide.bs.modal', function() {
     $("#edit-form-question").trigger("reset");
@@ -633,6 +711,11 @@ $(document).ready(function() {
   // reset form on edit-modal-choice hide 
   $('#edit-modal-choice').on('hide.bs.modal', function() {
     $("#edit-form-choice").trigger("reset");
+  });
+
+  // reset form on edit-modal-scaleQuestion hide
+  $('#edit-modal-scaleQuestion').on('hide.bs.modal', function() {
+      $("#edit-form-scaleQuestion").trigger("reset");
   });
  
 });

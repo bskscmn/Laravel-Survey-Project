@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 		//Scale
 		Route::post('/scales/store/{surveyid}',['as'=>'admin.createscalequestion','uses'=>'ChoiceController@storeScaleQuestion']);
+        Route::post('/scales/edit/{surveyid}',['as'=>'admin.scalesquestionedit','uses'=>'ChoiceController@updateScaleQuestion']);
 		Route::delete('scales/delete/{id}', ['as' => 'admin.scalequestiondestroy', 'uses' => 'ChoiceController@destroyScaleQuestion']);
 
 

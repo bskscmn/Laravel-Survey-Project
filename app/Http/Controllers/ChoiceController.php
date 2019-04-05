@@ -79,6 +79,31 @@ class ChoiceController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateScaleQuestion(Request $request, $surveyid)
+    {
+        $scaleQuestion = ScaleQuestion::findOrFail($request['id']);
+
+        $messages = [
+            'question_number.required' => 'Soru no alanı zorunludur.',
+            'soru.required' => 'Soru alanı zorunludur.',
+        ];
+        $this->validate($request,[
+            'question_number' => 'required|integer',
+            'soru' => 'required|string|max:255',
+        ], $messages);
+
+        $scaleQuestion->update($request->all());
+
+        $questionTypes = QuestionType::all();
+        return redirect()->to('/surveys/show/'.$surveyid)->with(compact('questionTypes'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
